@@ -1,0 +1,954 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-09-05",
+  "purpose": "Challengeable bibliography for conditional Durability Debt selection; not a systematic-review completeness claim or dependency lockfile.",
+  "status_definitions": {
+    "direct_primary": "Bibliography editor directly accessed the primary URL/text on review_date; notes delimit verification depth. Method correctness and experimental findings are not independently replicated.",
+    "scout_primary_review": "Primary source review is reported by candidate/challenge investigators and was read in full by bibliography editor on review_date. No independent direct access by editor is claimed; revisit before load-bearing new claims."
+  },
+  "license_policy": "Paper, code, dataset, bundled dependency and workload rights are distinct. No third-party source redistribution. Current branch links are not immutable license pins. Unknown terms block copying, not citation or conceptual prior-art relevance.",
+  "sources": [
+    {
+      "id": "persevere",
+      "title": "PerSeVerE: Persistency semantics for verification under ext4",
+      "url": "https://plv.mpi-sws.org/persevere/",
+      "role": "Direct algorithmic collision: joint consistency/persistency verification",
+      "verification": {
+        "status": "direct_primary",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": "2026-09-05",
+        "scout_access_date": null,
+        "notes": "Official title, authors, POPL 2021 identity, summary and artifact links accessed; detailed algorithm reviewed by two scouts."
+      },
+      "license": {
+        "assessment": "Unknown for linked artifact; verify archived component licenses",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://plv.mpi-sws.org/persevere/paper.pdf",
+        "https://plv.mpi-sws.org/persevere/paper-full.pdf",
+        "https://doi.org/10.5281/zenodo.4067991"
+      ]
+    },
+    {
+      "id": "pmrace",
+      "title": "PMRace (ASPLOS 2022)",
+      "url": "https://csyhua.github.io/csyhua/hua-asplos22-PMRace.pdf",
+      "role": "Direct phenomenon/provenance collision: reads of unpersisted PM and durable side effects",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "State-systems scout and independent crash challenge reviewed primary paper; not replicated."
+      },
+      "license": {
+        "assessment": "Code GPL-3.0 reported by scout; pin and verify",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/yhuacode/pmrace"
+      ]
+    },
+    {
+      "id": "durinn",
+      "title": "DURINN (OSDI 2022)",
+      "url": "https://www.usenix.org/system/files/osdi22-fu.pdf",
+      "role": "Direct VBD and adversarial interleaving/crash-state predecessor",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Two primary-paper reviews; durable linearizability is its target, not a universal workflow oracle."
+      },
+      "license": {
+        "assessment": "Artifact reuse license unverified",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/cosmoss-jigu/durinn"
+      ]
+    },
+    {
+      "id": "pathfinder",
+      "title": "Scalable and Accurate Application-Level Crash-Consistency Testing via Representative Testing",
+      "url": "https://arxiv.org/abs/2503.01390",
+      "role": "Strong application crash baseline and explicit concurrency gap",
+      "verification": {
+        "status": "direct_primary",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": "2026-09-05",
+        "scout_access_date": null,
+        "notes": "Abstract, authors and 2025-03-03 date accessed; full-paper synchronization limitation independently reviewed by scouts."
+      },
+      "license": {
+        "assessment": "Code MIT reported by scout; pinned component audit pending",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://arxiv.org/html/2503.01390",
+        "https://github.com/efeslab/Pathfinder"
+      ]
+    },
+    {
+      "id": "alice",
+      "title": "All File Systems Are Not Created Equal: On the Complexity of Crafting Crash-Consistent Applications",
+      "url": "https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-pillai.pdf",
+      "role": "Application trace/crash model/checker baseline; subprocess tracing is not novel",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Primary paper reviewed by state-systems and crash scouts; released capabilities must be checked separately."
+      },
+      "license": {
+        "assessment": "MIT outside alice-strace except source-specific notices; tracer BSD-style, directly verified",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/madthanu/alice"
+      ]
+    },
+    {
+      "id": "alice-license",
+      "title": "ALICE LICENSE.md",
+      "url": "https://raw.githubusercontent.com/madthanu/alice/master/LICENSE.md",
+      "role": "Authoritative code reuse terms",
+      "verification": {
+        "status": "direct_primary",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": "2026-09-05",
+        "scout_access_date": null,
+        "notes": "Actual license text accessed after LICENSE 404, API listing 403, and successful repository HTML discovery."
+      },
+      "license": {
+        "assessment": "MIT for files outside alice-strace except where otherwise noted",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "alice-tracer-license",
+      "title": "ALICE alice-strace/COPYING",
+      "url": "https://raw.githubusercontent.com/madthanu/alice/master/alice-strace/COPYING",
+      "role": "Authoritative tracer reuse terms",
+      "verification": {
+        "status": "direct_primary",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": "2026-09-05",
+        "scout_access_date": null,
+        "notes": "Copyright notices and three redistribution conditions accessed."
+      },
+      "license": {
+        "assessment": "Three-clause BSD-style; preserve exact notices",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "racepro",
+      "title": "RACEPRO (SOSP 2011)",
+      "url": "https://www.cs.columbia.edu/~junfeng/papers/racepro-sosp11.pdf",
+      "role": "Native multi-process schedule/replay half of strong composition",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Two primary-paper reviews; old custom-kernel implementation is an engineering limitation, not erased prior art."
+      },
+      "license": {
+        "assessment": "Current reusable implementation license unverified",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://systems.cs.columbia.edu/projects/racepro"
+      ]
+    },
+    {
+      "id": "lazyfs",
+      "title": "LazyFS (PVLDB 2024)",
+      "url": "https://www.vldb.org/pvldb/vol17/p3017-ramos.pdf",
+      "role": "Planned regular-file data fault backend, not a process scheduler",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Independent crash challenge reports data-only fault scope, unsupported metadata fault injection and future concurrency integration."
+      },
+      "license": {
+        "assessment": "MIT current main license directly verified; dependencies separate",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/dsrhaslab/lazyfs"
+      ]
+    },
+    {
+      "id": "lazyfs-license",
+      "title": "LazyFS LICENSE",
+      "url": "https://raw.githubusercontent.com/dsrhaslab/lazyfs/main/LICENSE",
+      "role": "Resolve README badge versus authoritative license conflict",
+      "verification": {
+        "status": "direct_primary",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": "2026-09-05",
+        "scout_access_date": null,
+        "notes": "Explicit MIT text, Copyright 2023 INESC TEC and bundled-library list accessed. README BSD badge contradicts text; text governs this assessment."
+      },
+      "license": {
+        "assessment": "MIT; no commit pinned and no transitive dependency license audit",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "fuse-io",
+      "title": "Linux kernel documentation: FUSE I/O Modes",
+      "url": "https://docs.kernel.org/filesystems/fuse/fuse-io.html",
+      "role": "Native fidelity boundary: cached reads and request/syscall mismatch",
+      "verification": {
+        "status": "direct_primary",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": "2026-09-05",
+        "scout_access_date": null,
+        "notes": "Reader extraction gave title only; raw HTML recovered cached, write-through and writeback-cache descriptions."
+      },
+      "license": {
+        "assessment": "Documentation license not audited",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "fsync",
+      "title": "fsync(2) — Linux manual page",
+      "url": "https://man7.org/linux/man-pages/man2/fsync.2.html",
+      "role": "File versus directory durability boundary and prevention null",
+      "verification": {
+        "status": "direct_primary",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": "2026-09-05",
+        "scout_access_date": null,
+        "notes": "Description directly states separate directory fsync requirement; rendered man-pages 6.18."
+      },
+      "license": {
+        "assessment": "Documentation license not audited",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "ferrite",
+      "title": "FERRITE: filesystem crash models and litmus testing (ASPLOS 2016)",
+      "url": "https://homes.cs.washington.edu/~arvind/papers/fsmodel.pdf",
+      "role": "Adjacent formal crash model predecessor",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Descriptive citation label; exact bibliographic title should be checked in paper before formal publication."
+      },
+      "license": {
+        "assessment": "Unverified",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "crashmonkey",
+      "title": "CrashMonkey/ACE (OSDI 2018)",
+      "url": "https://www.cs.utexas.edu/~vijay/papers/osdi18-crashmonkey.pdf",
+      "role": "Filesystem-implementation testing boundary",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Short POSIX workload/block replay testing; not application semantic scheduling evidence."
+      },
+      "license": {
+        "assessment": "Code Apache-2.0 reported by scout; subjects retain licenses",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/utsaslab/crashmonkey"
+      ]
+    },
+    {
+      "id": "snapcc",
+      "title": "SnapCC (TOSEM 2025)",
+      "url": "http://www.wingtecher.com/themes/WingTecherResearch/assets/papers/paper_from_25/SnapCC_TOSEM25.pdf",
+      "role": "Recent filesystem-implementation crash exploration neighbor",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Scoped review only; no experiment or artifact replication."
+      },
+      "license": {
+        "assessment": "Public implementation/license not established",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "txfs",
+      "title": "TxFS (USENIX ATC 2018)",
+      "url": "https://www.usenix.org/system/files/conference/atc18/atc18-hu.pdf",
+      "role": "Transaction-based prevention predecessor",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Filesystem transaction scope reviewed; old kernel dependencies do not establish novelty."
+      },
+      "license": {
+        "assessment": "Code GPL-2.0 reported by scout",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/ut-osa/txfs"
+      ]
+    },
+    {
+      "id": "txos",
+      "title": "TxOS (SOSP 2009)",
+      "url": "https://www.sigops.org/s/conferences/sosp/2009/papers/porter-sosp09.pdf",
+      "role": "OS transaction scope-escape collision",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Includes broader OS effects under stated transaction boundaries."
+      },
+      "license": {
+        "assessment": "Artifact reuse terms unverified",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "valor",
+      "title": "Valor (FAST 2009)",
+      "url": "https://www.usenix.org/legacy/event/fast09/tech/full_papers/spillane/spillane.pdf",
+      "role": "Transactional POSIX and subprocess prevention predecessor",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Prevents presenting transparent workflow transactions as greenfield."
+      },
+      "license": {
+        "assessment": "Artifact reuse terms unverified",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "buildfs",
+      "title": "BuildFS",
+      "url": "https://arxiv.org/html/2005.06881",
+      "role": "Build dependency/order faults; possible later licensed workload source",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Source corpus is not selected/evaluated in this project."
+      },
+      "license": {
+        "assessment": "Code GPL-3.0 reported; each subject needs its own license audit",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/theosotr/buildfs"
+      ]
+    },
+    {
+      "id": "rattle",
+      "title": "Build Scripts with Perfect Dependencies",
+      "url": "https://arxiv.org/pdf/2007.12737",
+      "role": "Build hazards and complete-support memoization collision",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Verification and independent evidence challenge reviewed tracing assumptions, negative inputs and gaps."
+      },
+      "license": {
+        "assessment": "Repository BSD-3-Clause reported; package metadata also advertises Apache-2.0 option; pin before reuse",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/ndmitchell/rattle"
+      ]
+    },
+    {
+      "id": "nix",
+      "title": "The Purely Functional Software Deployment Model",
+      "url": "https://edolstra.github.io/pubs/phd-thesis.pdf",
+      "role": "Immutable stores/build isolation/publication prevention neighbor",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Thesis reviewed by state-systems scout."
+      },
+      "license": {
+        "assessment": "Current Nix LGPL-2.1 reported by scout; thesis rights separate",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/NixOS/nix"
+      ]
+    },
+    {
+      "id": "sqlite-atomic",
+      "title": "Atomic Commit In SQLite",
+      "url": "https://sqlite.org/atomiccommit.html",
+      "role": "Database-local guarantee boundary; planned workload semantics",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Does not confer arbitrary sibling-file atomicity."
+      },
+      "license": {
+        "assessment": "SQLite core public-domain status reported; recheck selected distributions",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "sqlite-wal",
+      "title": "Write-Ahead Logging",
+      "url": "https://sqlite.org/wal.html",
+      "role": "SQLite WAL and attached-database atomicity limits",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "WAL is planned, not delivered reference-model coverage."
+      },
+      "license": {
+        "assessment": "See SQLite copyright statement",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://sqlite.org/copyright.html"
+      ]
+    },
+    {
+      "id": "effectbound",
+      "title": "When Does Authorization End? Effect Closure at Provider Boundaries",
+      "url": "https://arxiv.org/abs/2609.02866",
+      "role": "Decisive authority/recovery elimination predecessor",
+      "verification": {
+        "status": "direct_primary",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": "2026-09-05",
+        "scout_access_date": null,
+        "notes": "Abstract, author Igor Santos-Grueiro, submission 2026-09-02, hidden-state control and frontier claims accessed; detailed full-paper claims scout reviewed."
+      },
+      "license": {
+        "assessment": "Paper CC-BY-4.0 directly visible; artifact software license not located by scouts",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://arxiv.org/html/2609.02866",
+        "https://anonymous.4open.science/r/effectbound/"
+      ]
+    },
+    {
+      "id": "vera",
+      "title": "VERA: delegation-DAG revocation",
+      "url": "https://arxiv.org/html/2608.30091",
+      "role": "Exact multi-parent revocation collision",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Descriptive short title; authority scout reports exact edge target and alternate paths."
+      },
+      "license": {
+        "assessment": "Artifact reuse license unverified",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "revise",
+      "title": "REVISE: in-flight agent workflow revision",
+      "url": "https://arxiv.org/html/2609.00643",
+      "role": "Recovery candidate overlaps dependency invalidation/commit validity",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Descriptive short title; reported scope is in-process validity, not distributed crash consensus."
+      },
+      "license": {
+        "assessment": "Reusable artifact license not established",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "atomix",
+      "title": "Atomix: transactional agent runtime",
+      "url": "https://arxiv.org/html/2602.14849",
+      "role": "Resource conflict frontier/recovery composition predecessor",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Descriptive short title; adapter capabilities bound guarantees."
+      },
+      "license": {
+        "assessment": "Accessible code/license not established",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "resume-contract",
+      "title": "Resume Means Resume",
+      "url": "https://arxiv.org/html/2608.03836",
+      "role": "Explicit persistence semantics and recovery-conformance predecessor",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Recovery scout reviewed formal/fault-testing claims; not replicated here."
+      },
+      "license": {
+        "assessment": "Code MIT reported by scout; verify chosen repository",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/sajjadanwar0/remit-contract"
+      ]
+    },
+    {
+      "id": "rifl",
+      "title": "RIFL: reusable infrastructure for linearizability",
+      "url": "https://web.stanford.edu/~ouster/cgi-bin/papers/rifl.pdf",
+      "role": "Classical server-participating exactly-once RPC boundary",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Descriptive citation label; durable deduplication/result coupling is the load-bearing comparison."
+      },
+      "license": {
+        "assessment": "Paper/code rights not audited",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "bazel-re",
+      "title": "Remote Execution API: Action and Command protocol",
+      "url": "https://github.com/bazelbuild/remote-apis/blob/main/build/bazel/remote/execution/v2/remote_execution.proto",
+      "role": "Strong complete-action-key evidence-liveness null",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Independent evidence challenge inspected Action/Command, input root, environment, platform and cache controls."
+      },
+      "license": {
+        "assessment": "Repository/code terms not independently audited",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "ekstazi",
+      "title": "Ekstazi (ISSTA 2015)",
+      "url": "https://users.ece.utexas.edu/~gligoric/papers/GligoricETAL15Ekstazi.pdf",
+      "role": "Dynamic regression-test selection, including negative dependencies",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Two reviews; negative path dependencies are already prior art."
+      },
+      "license": {
+        "assessment": "Code Apache-2.0 reported by independent challenge",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/gliga/ekstazi"
+      ]
+    },
+    {
+      "id": "starts",
+      "title": "STARTS (ASE 2017 tool demonstration)",
+      "url": "https://www.cs.cornell.edu/~legunsen/pubs/LegunsenETAL17STARTS.pdf",
+      "role": "Static transitive compiled-class dependency selection",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Independent challenge reviewed source-versus-executable distinction and limitations."
+      },
+      "license": {
+        "assessment": "Code University of Illinois/NCSA reported",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/TestingResearchIllinois/starts"
+      ]
+    },
+    {
+      "id": "icoq",
+      "title": "iCoq (ASE 2017)",
+      "url": "https://doi.org/10.1109/ASE.2017.8115630",
+      "role": "Fine-grained proof selection collision",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Domain-native proof dependencies; wrapper labels are not a new mechanism."
+      },
+      "license": {
+        "assessment": "OPAM metadata reportedly Proprietary; do not assume reuse permission",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/ProofEngineering/icoq"
+      ]
+    },
+    {
+      "id": "hermes-ledger",
+      "title": "Hermes verification-evidence ledger, PR 52285",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/52285",
+      "role": "Deployed typed verification ledger and stale-on-write null",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Two reviews report merged status and blanket invalidation; pin source revision before behavioral comparison."
+      },
+      "license": {
+        "assessment": "Hermes MIT reported by independent challenge",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/NousResearch/hermes-agent/blob/main/agent/verification_evidence.py"
+      ]
+    },
+    {
+      "id": "stored-supported",
+      "title": "Stored Is Not Supported: Typed Provenance and Assertion Guardrails for Persistent AI Agents",
+      "url": "https://arxiv.org/abs/2609.02127",
+      "role": "Typed temporal claim-support collision",
+      "verification": {
+        "status": "direct_primary",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": "2026-09-05",
+        "scout_access_date": null,
+        "notes": "Abstract, Jun He and Deying Yu, publication 2026-09-02 accessed; detailed graph/revocation review by evidence challenge."
+      },
+      "license": {
+        "assessment": "Paper and artifact licenses unverified",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "tebench",
+      "title": "TEBench: test-evolution benchmark",
+      "url": "https://arxiv.org/html/2605.06125v1",
+      "role": "Passing-outcome preservation is not test adequacy",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Descriptive short title; three-state evolution results are authors reports, not replication here."
+      },
+      "license": {
+        "assessment": "HF metadata/annotations CC-BY-4.0 reported by independent challenge; embedded projects separate",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://huggingface.co/datasets/iSEngLab/TEBench",
+        "https://github.com/iSEngLab/TEBench"
+      ]
+    },
+    {
+      "id": "nebius-trajectories",
+      "title": "Nebius SWE-agent trajectories",
+      "url": "https://huggingface.co/datasets/nebius/SWE-agent-trajectories",
+      "role": "Inactive empirical alternative: exact intermediate replay candidate",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Two reviews report ordered trajectories/patches; exact reconstructibility remains untested."
+      },
+      "license": {
+        "assessment": "Card CC-BY-4.0 reported; underlying source/model-output conditions remain",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "pep825-metadata",
+      "title": "Appendix: Rationale for the Metadata Consistency Requirements",
+      "url": "https://peps.python.org/pep-0825/appendix-metadata-consistency/",
+      "role": "Direct sibling-wheel metadata audit/standards collision",
+      "verification": {
+        "status": "direct_primary",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": "2026-09-05",
+        "scout_access_date": null,
+        "notes": "Directly accessed constrained keys, 2024 scan discussion and explicit limitations. Not population-wide novelty evidence."
+      },
+      "license": {
+        "assessment": "Documentation reuse terms not audited",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://peps.python.org/pep-0825/"
+      ]
+    },
+    {
+      "id": "avp",
+      "title": "Artifact Verification Platform: Reproducibility is Not Enough",
+      "url": "https://arxiv.org/html/2608.18180",
+      "role": "Wheel alternative exact/normalized/equivalence comparator collision",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Descriptive short title from supply-chain report; artifact-centric evaluation boundary needs refreshed primary/code check."
+      },
+      "license": {
+        "assessment": "Reusable code/data license not located by scout",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "no-snake-oil",
+      "title": "No Snake Oil: PyPI reproducible/equivalent build study",
+      "url": "https://arxiv.org/html/2607.21888",
+      "role": "Structural artifact equivalence comparator for wheel alternative",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Descriptive short title; reviewed scope compares pure-Python universal wheel with rebuild, not all sibling wheels."
+      },
+      "license": {
+        "assessment": "Paper/data terms unverified; daleq4py UPL-1.0 reported",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/binaryeq/daleq4py"
+      ]
+    },
+    {
+      "id": "lastpymile",
+      "title": "LastPyMile (ESEC/FSE 2021)",
+      "url": "https://doi.org/10.1145/3468264.3468592",
+      "role": "Artifact-to-source comparison predecessor",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Supply-chain scout reviewed source/artifact relation."
+      },
+      "license": {
+        "assessment": "Code Apache-2.0 reported",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/assuremoss/lastpymile"
+      ]
+    },
+    {
+      "id": "pep740",
+      "title": "Index hosted attestations (PEP 740)",
+      "url": "https://packaging.python.org/en/latest/specifications/index-hosted-attestations/",
+      "role": "File-scoped attestation boundary for wheel alternative",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Valid statement does not imply complete materials or coherent all-wheel origin."
+      },
+      "license": {
+        "assessment": "Specification/code terms not audited",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "bayesian-archive",
+      "title": "Bayesian Inference and Decision Audits for Public Archives of Frontier AI Evaluations",
+      "url": "https://arxiv.org/abs/2606.17005",
+      "role": "Direct public-archive audit predecessor",
+      "verification": {
+        "status": "direct_primary",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": "2026-09-05",
+        "scout_access_date": null,
+        "notes": "Abstract, Yanan Long, submission 2026-06-15, observability/fixed failed gates and article license accessed."
+      },
+      "license": {
+        "assessment": "Paper CC-BY-NC-ND-4.0 directly visible; no redistribution here",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://arxiv.org/html/2606.17005"
+      ]
+    },
+    {
+      "id": "eee",
+      "title": "Every Eval Ever",
+      "url": "https://arxiv.org/html/2606.14516",
+      "role": "Evaluation ingestion/provenance/comparability collision",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Reported metadata sparsity is prior art, not a new census finding."
+      },
+      "license": {
+        "assessment": "Code/datastore MIT reported; source assets may retain other terms",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/evaleval/every_eval_ever",
+        "https://huggingface.co/datasets/evaleval/EEE_datastore"
+      ]
+    },
+    {
+      "id": "evaluation-cards",
+      "title": "Evaluation Cards",
+      "url": "https://arxiv.org/html/2606.09809",
+      "role": "Evaluation reporting/provenance interpretation predecessor",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Evaluation scout reviewed reporting and monitoring scope."
+      },
+      "license": {
+        "assessment": "Paper/code reuse terms unverified",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "openeval",
+      "title": "OpenEval",
+      "url": "https://arxiv.org/html/2604.03244",
+      "role": "Item-level public release/schema predecessor",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Evaluation scout reviewed item/response evidence; not imported."
+      },
+      "license": {
+        "assessment": "Dataset CC-BY-NC-4.0 reported; code terms unverified",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://huggingface.co/datasets/Open-Eval-Commons/OpenEval"
+      ]
+    },
+    {
+      "id": "croissant-tasks",
+      "title": "Croissant Tasks",
+      "url": "https://arxiv.org/html/2605.29786",
+      "role": "Declarative evaluation metadata collision",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Evaluation scout reviewed task/problem separation and reproduction scope."
+      },
+      "license": {
+        "assessment": "Reuse terms unverified",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    },
+    {
+      "id": "cafe",
+      "title": "CAFE",
+      "url": "https://arxiv.org/html/2607.10380",
+      "role": "Prospective factorial attribution baseline",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Full-factorial interactions/replication already precede generic component bridge claims."
+      },
+      "license": {
+        "assessment": "Code Apache-2.0 reported",
+        "pinned_revision": null
+      },
+      "related_urls": [
+        "https://github.com/fabian-lu/Cafe"
+      ]
+    },
+    {
+      "id": "manski",
+      "title": "Partial Identification of Probability Distributions",
+      "url": "https://link.springer.com/book/10.1007/b97478",
+      "role": "Foundational partial-identification method, not evaluation novelty",
+      "verification": {
+        "status": "scout_primary_review",
+        "reviewed_on": "2026-09-05",
+        "direct_accessed_on": null,
+        "scout_access_date": "2026-09-05",
+        "notes": "Evaluation scout cited established assumption-light bounds; not reproduced."
+      },
+      "license": {
+        "assessment": "Publisher rights; no source redistribution",
+        "pinned_revision": null
+      },
+      "related_urls": []
+    }
+  ]
+}
