@@ -59,3 +59,11 @@ cmp results/launch/report.json /tmp/durability-debt-final-replay-20260905/report
 **Observation:** all 13 probe gates and 13 regressions passed. Eight cases and five baseline/search-order configurations ran. The bad-seed one-trace baseline finds the motivating failure and receives full credit; joint outcome sets match under reversed traversal. Old-version/no-sink controls have zero violations. Final canonical and fresh replay reports are byte-identical.
 
 **Adjustment/decision:** Gate 0 is satisfied for the declared finite model. This does not change the near-KILL novelty assessment. Gate 1, the strongest-composition/product-preservation investigation, is the next scientific action. Do not build the native backend before that decision.
+
+## L4 — public cross-version verification — 2026-09-05
+
+**Goal:** verify the published artifact on independent CI runtimes and remove a newly observed workflow compatibility warning.
+
+**Action/observation:** initial GitHub run `34002552071` passed all steps on Python 3.11 and 3.14. It warned that the initially pinned checkout/setup-python actions targeted deprecated Node 20 and were being forced onto Node 24.
+
+**Adjustment:** resolved current official releases and pinned checkout v7.0.1 and setup-python v7.0.0 by immutable SHA. Checkout's pinned `action.yml` declares Node 24. This fixes the action runtime rather than suppressing the annotation. The updated workflow must pass before final delivery; its GitHub run is the CI result authority. Model source and canonical finite evidence are unchanged.
