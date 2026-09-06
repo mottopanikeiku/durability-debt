@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "durability-debt"
+version = "0.1.0"
+description = "Finite reference experiments for joint schedule and crash exploration"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{name = "mottopanikeiku"}]
+dependencies = []
+
+[project.scripts]
+durability-debt = "durability_debt.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["durability_debt*"]
