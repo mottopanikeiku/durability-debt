@@ -23,11 +23,22 @@ class ReferenceTests(unittest.TestCase):
         witness = result["first_witness"]
         self.assertGreater(witness["disk"]["manifest"], witness["disk"]["source"])
         self.assertTrue(replay_witness(program, witness)["verified"])
+        bad_seed = explore(program, scheduling="seed", seed_order="consumer_first")
+        self.assertGreater(bad_seed["unique_violating_observations"], 0)
+        reverse = explore(program, seed_order="consumer_first")
+        self.assertEqual(result["recovery_outcomes"], reverse["recovery_outcomes"])
 
     def test_durability_before_publication_removes_the_failure(self):
         result = explore(self.programs["flush_before_publish"])
         self.assertEqual(result["unique_violating_observations"], 0)
         self.assertEqual(result["no_crash_violations"], 0)
+
+    def test_old_read_and_absent_sink_do_not_invent_failures(self):
+        old = explore(self.programs["old_version_consumer"])
+        absent = explore(self.programs["no_relevant_sink"])
+        self.assertEqual(old["unique_violating_observations"], 0)
+        self.assertEqual(absent["unique_violating_observations"], 0)
+        self.assertTrue(all(outcome["records"]["manifest"] == 0 for outcome in old["recovery_outcomes"]))
 
     def test_semantic_recovery_separates_candidates_from_bugs(self):
         logger = self.programs["independent_logger"]

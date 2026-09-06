@@ -49,7 +49,9 @@ def run_probe(output: Path) -> dict:
         for program in programs:
             results[program.name] = {
                 "seed_cartesian": explore(program, scheduling="seed", **SETTINGS),
+                "bad_seed_cartesian": explore(program, scheduling="seed", seed_order="consumer_first", **SETTINGS),
                 "joint_cartesian": explore(program, **SETTINGS),
+                "reversed_joint_cartesian": explore(program, seed_order="consumer_first", **SETTINGS),
                 "joint_extrema": explore(program, crash_policy="extrema", **SETTINGS),
             }
         def fails(case: str, policy: str = "joint_cartesian") -> bool:
@@ -57,7 +59,14 @@ def run_probe(output: Path) -> dict:
         gates = {
             "seed_schedule_hides_race": not fails("publish_before_flush", "seed_cartesian"),
             "joint_schedule_exposes_race": fails("publish_before_flush"),
+            "bad_seed_baseline_gets_full_credit": fails("publish_before_flush", "bad_seed_cartesian"),
+            "joint_outcomes_are_seed_order_invariant": all(
+                policies["joint_cartesian"]["recovery_outcomes"]
+                == policies["reversed_joint_cartesian"]["recovery_outcomes"]
+                for policies in results.values()),
             "durable_handoff_prevents_violation": not fails("flush_before_publish"),
+            "old_version_consumer_is_allowed": not fails("old_version_consumer"),
+            "no_sink_means_no_cross_resource_violation": not fails("no_relevant_sink"),
             "independent_logger_is_not_a_bug": not fails("independent_logger"),
             "invalid_cache_is_discarded": not fails("self_validating_cache"),
             "ordinary_missing_flush_is_found_by_seed": fails("single_process_missing_flush", "seed_cartesian"),

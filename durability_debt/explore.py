@@ -13,12 +13,15 @@ def explore(
     *,
     crash_policy: str = "cartesian",
     scheduling: str = "joint",
+    seed_order: str = "producer_first",
     max_preemptions: int = 2,
     max_prefixes: int = 50_000,
     max_crash_evaluations: int = 250_000,
 ) -> dict:
     if crash_policy not in {"cartesian", "extrema"} or scheduling not in {"joint", "seed"}:
         raise ValueError("unsupported exploration policy")
+    if seed_order not in {"producer_first", "consumer_first"}:
+        raise ValueError("unsupported seed order")
     if max_preemptions < 0 or max_prefixes < 1 or max_crash_evaluations < 1:
         raise ValueError("invalid exploration bound")
     counts = dict(prefixes=0, complete_schedules=0, deadlocked_prefixes=0,
@@ -63,6 +66,8 @@ def explore(
         if not available:
             counts["deadlocked_prefixes"] += 1
             return
+        if seed_order == "consumer_first":
+            available = tuple(reversed(available))
         if scheduling == "seed":
             available = available[:1]
         for actor in available:
@@ -79,11 +84,16 @@ def explore(
     replay = replay_witness(program, first_witness, max_preemptions=max_preemptions) if first_witness else None
     return {
         "program": program.name, "crash_policy": crash_policy, "scheduling": scheduling,
+        "seed_order": seed_order,
         "max_preemptions": max_preemptions, "complete_within_bound": True,
         "coverage": "all admitted crash images" if crash_policy == "cartesian" else "existence oracle for declared integer-order claims only",
         **counts, "unique_raw_images": len(raw_images),
         "unique_recovery_observations": len(observations),
         "unique_violating_observations": len(failures),
+        "recovery_outcomes": [
+            {"records": dict(projected), "violations": list(violations)}
+            for projected, violations in sorted(observations, key=repr)
+        ],
         "first_witness": first_witness, "witness_replay": replay,
         "seed_or_first_complete_schedule": first_terminal,
     }
