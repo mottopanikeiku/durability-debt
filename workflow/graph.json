@@ -1,0 +1,88 @@
+{
+  "schema": "durability-debt-research-dag/1",
+  "launch_status": "baseline_complete_thesis_unproven",
+  "next_node": "G2",
+  "integration_owner": "research-lead",
+  "rules": [
+    "Completed means acceptance evidence exists, not merely an output path.",
+    "Failed nodes block dependent positive claims; negative closeout is a separate branch.",
+    "One logical owner per output; research-lead may assign independent implementation owners but serializes shared writes.",
+    "Checkpoints bind source, inputs, settings, environment, successful exit and outputs.",
+    "Native and scaled work require explicit preceding gate advancement."
+  ],
+  "nodes": [
+    {
+      "id": "G0", "status": "completed", "owner": "research-lead",
+      "objective": "Freeze mandate, six-family selection, hostile prior-art boundary and protocol",
+      "depends_on": [],
+      "inputs": ["User launch mandate recorded in AGENTS.md", "Primary sources catalogued in research/SOURCES.json"],
+      "outputs": ["AGENTS.md", "README.md", "research/SELECTION.md", "research/PRIOR_ART.md", "research/SOURCES.json", "research/THESIS.md", "research/PROTOCOL.md", "research/BASELINES.md", "research/THREATS.md"],
+      "acceptance": ["Explicit conditional selection and strongest composition", "Sole authorship and safety constraints recovered", "Operational kill gates and negative-result route"],
+      "downstream_evidence": ["G1 model assumptions", "G2 novelty and baseline obligations"]
+    },
+    {
+      "id": "G1", "status": "completed", "owner": "model-owner",
+      "objective": "Complete Protocol Gate 0 finite oracle, controls, seed reversal and reproducible evidence",
+      "depends_on": ["G0"],
+      "inputs": ["research/PROTOCOL.md", "research/BASELINES.md"],
+      "outputs": ["durability_debt/model.py", "durability_debt/explore.py", "durability_debt/cases.py", "durability_debt/probe.py", "durability_debt/__main__.py", "tests/test_reference.py", "research/MODEL.md", "research/CLAIMS.md", "research/LOOP_LOG.md", "results/launch/inputs.json", "results/launch/report.json", "results/launch/manifest.json"],
+      "acceptance": ["13 canonical gates pass across eight cases and five configurations", "13 behavioral regression tests pass", "Both seed baselines credited and joint outcome sets equal under reversed order", "Finite witness replay, immutable bundles, and no native claim"],
+      "downstream_evidence": ["G2 exact bounded reference and strong elementary null"]
+    },
+    {
+      "id": "G2", "status": "pending", "owner": "research-lead",
+      "objective": "Execute Protocol Gate 1: kill or substantiate a product-aware mechanism beyond composition",
+      "depends_on": ["G0", "G1"],
+      "inputs": ["research/PRIOR_ART.md", "research/SOURCES.json", "research/BASELINES.md", "research/PROTOCOL.md", "research/MODEL.md", "results/launch/inputs.json"],
+      "outputs": ["research/REDUCTION_DECISION.md", "research/REDUCTION_PROOF.md", "research/dependency-pins.json", "results/reduction/report.json"],
+      "acceptance": ["Pin and attempt actual PerSeVerE semantic comparison; unavailable is not passed", "Publish finite grammar before enumeration: at most eight events, two actors, two preemptions, values 0/1", "Implement strong B4 and explicit-observer null before candidate comparison", "Exact bounded outcome preservation, dependency-mutant counterexamples and substantive separation", "Stop after the protocol investment cap or known-method equivalence; failed decision need not fabricate proof/result outputs"],
+      "downstream_evidence": ["G3 may start only after an explicit advancement decision", "G7 may close a killed method honestly"]
+    },
+    {
+      "id": "G3", "status": "pending", "owner": "native-owner",
+      "objective": "Execute Protocol Gate 2 restricted native supervisor and source-to-SQLite feasibility",
+      "depends_on": ["G2"],
+      "inputs": ["research/REDUCTION_DECISION.md", "research/REDUCTION_PROOF.md", "research/PROTOCOL.md", "research/THREATS.md", "research/dependency-pins.json"],
+      "outputs": ["research/NATIVE_CONTRACT.md", "results/native-feasibility/report.json", "research/NATIVE_DECISION.md"],
+      "acceptance": ["Safe disposable root, no privileged/security changes", "Separate process/IPC supervision from FUSE request control", "Admitted materialized image and real recovery, with no ext4 equivalence assertion", "At least 9/10 bad-witness replay; supported negative controls 10/10; unsupported events refused", "Missing dependencies or unsupported behavior blocks native acceptance"],
+      "downstream_evidence": ["G4 supported native intersection and calibrated checker interfaces"]
+    },
+    {
+      "id": "G4", "status": "pending", "owner": "evaluation-owner",
+      "objective": "Execute Protocol Gate 3 on exactly six preregistered real workflow classes",
+      "depends_on": ["G3"],
+      "inputs": ["research/NATIVE_CONTRACT.md", "research/NATIVE_DECISION.md", "research/PROTOCOL.md", "research/BASELINES.md"],
+      "outputs": ["corpus/pilot-manifest.json", "corpus/checker-contracts.json", "results/pilot/report.json", "research/PILOT_DECISION.md"],
+      "acceptance": ["One license-clear pinned workflow from each W1-W6 class before faults", "No target fault injection or artificial upstream promise", "Matched B0-B6 budgets and outcome coverage; incremental real schedule-conditioned witness", "Protocol 10x versus B0 and 2x end-to-end versus B4 gates, replay/triage/checker/prevention checks"],
+      "downstream_evidence": ["G5 acquisition and method justification", "G7 negative pilot route"]
+    },
+    {
+      "id": "G5", "status": "pending", "owner": "evaluation-owner",
+      "objective": "Execute Protocol Gate 4 on twenty distinct real workflows only after pilot advancement",
+      "depends_on": ["G4"],
+      "inputs": ["research/PILOT_DECISION.md", "research/PROTOCOL.md", "corpus/pilot-manifest.json", "corpus/checker-contracts.json"],
+      "outputs": ["corpus/full-manifest.json", "results/full/report.json", "research/FULL_DECISION.md"],
+      "acceptance": ["Frozen 4+3+4+4+3+2 roster with shared-project dependence disclosed", "Incremental real failures beyond one-trace and random baselines", "Matched coverage/cost, negative and censored rows, no convenience-sample prevalence claim", "Stop on zero incremental failures or failed soundness/practical gates"],
+      "downstream_evidence": ["G6 positive manuscript evidence", "G7 empirical null evidence"]
+    },
+    {
+      "id": "G6", "status": "pending", "owner": "research-lead",
+      "objective": "Produce a positive thesis and reproducible artifact only if supported",
+      "depends_on": ["G5"],
+      "inputs": ["research/FULL_DECISION.md", "results/full/report.json", "research/REDUCTION_PROOF.md", "research/THREATS.md"],
+      "outputs": ["paper/manuscript.tex", "research/PUBLICATION_DECISION.md"],
+      "acceptance": ["Renewed hostile novelty review", "All claims mapped to evidence and uncertainty", "Responsible disclosure and third-party licenses satisfied", "Sole human authorship and required assistance disclosure; no promised acceptance"],
+      "downstream_evidence": ["Human-reviewed venue submission decision"]
+    },
+    {
+      "id": "G7", "status": "pending", "owner": "research-lead",
+      "activation": "Only when a scientific gate is killed or irreducibly blocked; not a parallel positive claim",
+      "objective": "Complete an honest negative or blocked research closeout",
+      "depends_on": ["G0", "G1"],
+      "inputs": ["research/PROTOCOL.md", "research/CLAIMS.md", "The recorded failed/blocked gate decision and immutable evidence"],
+      "outputs": ["research/NEGATIVE_RESULT.md", "research/CLOSEOUT.md"],
+      "acceptance": ["Exact failed claim, strongest null, attempted correction and preserved evidence", "No missing result recast as success", "Document what is useful and what must not be claimed", "Explicit human decision before a material pivot"],
+      "downstream_evidence": ["Closed research record or separately authorized new selection"]
+    }
+  ]
+}
