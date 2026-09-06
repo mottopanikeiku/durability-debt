@@ -1,0 +1,996 @@
+{
+  "decision": "mechanism sanity only; novelty and native feasibility remain open",
+  "gates": {
+    "all_cases_terminate_without_deadlock": true,
+    "durable_handoff_prevents_violation": true,
+    "extrema_matches_existence_oracle": true,
+    "independent_logger_is_not_a_bug": true,
+    "invalid_cache_is_discarded": true,
+    "joint_schedule_exposes_race": true,
+    "no_crash_controls_pass": true,
+    "ordinary_missing_flush_is_found_by_seed": true,
+    "seed_schedule_hides_race": true
+  },
+  "passed": true,
+  "results": {
+    "flush_before_publish": {
+      "joint_cartesian": {
+        "complete_schedules": 1,
+        "complete_within_bound": true,
+        "coverage": "all admitted crash images",
+        "crash_evaluations": 10,
+        "crash_policy": "cartesian",
+        "deadlocked_prefixes": 0,
+        "first_witness": null,
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 8,
+        "program": "flush_before_publish",
+        "scheduling": "joint",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 3,
+        "unique_recovery_observations": 3,
+        "unique_violating_observations": 0,
+        "witness_replay": null
+      },
+      "joint_extrema": {
+        "complete_schedules": 1,
+        "complete_within_bound": true,
+        "coverage": "existence oracle for declared integer-order claims only",
+        "crash_evaluations": 8,
+        "crash_policy": "extrema",
+        "deadlocked_prefixes": 0,
+        "first_witness": null,
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 8,
+        "program": "flush_before_publish",
+        "scheduling": "joint",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 3,
+        "unique_recovery_observations": 3,
+        "unique_violating_observations": 0,
+        "witness_replay": null
+      },
+      "seed_cartesian": {
+        "complete_schedules": 1,
+        "complete_within_bound": true,
+        "coverage": "all admitted crash images",
+        "crash_evaluations": 10,
+        "crash_policy": "cartesian",
+        "deadlocked_prefixes": 0,
+        "first_witness": null,
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 8,
+        "program": "flush_before_publish",
+        "scheduling": "seed",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 3,
+        "unique_recovery_observations": 3,
+        "unique_violating_observations": 0,
+        "witness_replay": null
+      }
+    },
+    "independent_logger": {
+      "joint_cartesian": {
+        "complete_schedules": 5,
+        "complete_within_bound": true,
+        "coverage": "all admitted crash images",
+        "crash_evaluations": 34,
+        "crash_policy": "cartesian",
+        "deadlocked_prefixes": 0,
+        "first_witness": null,
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 22,
+        "program": "independent_logger",
+        "scheduling": "joint",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 4,
+        "unique_recovery_observations": 1,
+        "unique_violating_observations": 0,
+        "witness_replay": null
+      },
+      "joint_extrema": {
+        "complete_schedules": 5,
+        "complete_within_bound": true,
+        "coverage": "existence oracle for declared integer-order claims only",
+        "crash_evaluations": 22,
+        "crash_policy": "extrema",
+        "deadlocked_prefixes": 0,
+        "first_witness": null,
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 22,
+        "program": "independent_logger",
+        "scheduling": "joint",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 4,
+        "unique_recovery_observations": 1,
+        "unique_violating_observations": 0,
+        "witness_replay": null
+      },
+      "seed_cartesian": {
+        "complete_schedules": 1,
+        "complete_within_bound": true,
+        "coverage": "all admitted crash images",
+        "crash_evaluations": 11,
+        "crash_policy": "cartesian",
+        "deadlocked_prefixes": 0,
+        "first_witness": null,
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 8,
+        "program": "independent_logger",
+        "scheduling": "seed",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 3,
+        "unique_recovery_observations": 1,
+        "unique_violating_observations": 0,
+        "witness_replay": null
+      }
+    },
+    "independent_noise": {
+      "joint_cartesian": {
+        "complete_schedules": 9,
+        "complete_within_bound": true,
+        "coverage": "all admitted crash images",
+        "crash_evaluations": 193,
+        "crash_policy": "cartesian",
+        "deadlocked_prefixes": 0,
+        "first_witness": {
+          "actors": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "disk": {
+            "manifest": 1,
+            "noise": 0,
+            "source": 0
+          },
+          "persisted_prefixes": [
+            0,
+            1,
+            0
+          ],
+          "preemptions": 1,
+          "recovered": {
+            "manifest": 1,
+            "noise": 0,
+            "source": 0
+          },
+          "violations": [
+            "manifest<=source"
+          ]
+        },
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 3,
+        "prefixes": 42,
+        "program": "independent_noise",
+        "scheduling": "joint",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 12,
+        "unique_recovery_observations": 4,
+        "unique_violating_observations": 1,
+        "witness_replay": {
+          "events": [
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "noise",
+                "value": 1
+              },
+              "pc": 0
+            },
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "source",
+                "value": 1
+              },
+              "pc": 1
+            },
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "signal",
+                "target": "ready",
+                "value": null
+              },
+              "pc": 2
+            },
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "noise",
+                "value": 2
+              },
+              "pc": 3
+            },
+            {
+              "actor": 1,
+              "instruction": {
+                "kind": "wait",
+                "target": "ready",
+                "value": null
+              },
+              "pc": 0
+            },
+            {
+              "actor": 1,
+              "instruction": {
+                "kind": "read",
+                "target": "source",
+                "value": "seen"
+              },
+              "pc": 1
+            },
+            {
+              "actor": 1,
+              "instruction": {
+                "kind": "copy",
+                "target": "manifest",
+                "value": "seen"
+              },
+              "pc": 2
+            }
+          ],
+          "verified": true
+        }
+      },
+      "joint_extrema": {
+        "complete_schedules": 9,
+        "complete_within_bound": true,
+        "coverage": "existence oracle for declared integer-order claims only",
+        "crash_evaluations": 42,
+        "crash_policy": "extrema",
+        "deadlocked_prefixes": 0,
+        "first_witness": {
+          "actors": [
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "disk": {
+            "manifest": 1,
+            "noise": 0,
+            "source": 0
+          },
+          "persisted_prefixes": [
+            0,
+            1,
+            0
+          ],
+          "preemptions": 1,
+          "recovered": {
+            "manifest": 1,
+            "noise": 0,
+            "source": 0
+          },
+          "violations": [
+            "manifest<=source"
+          ]
+        },
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 3,
+        "prefixes": 42,
+        "program": "independent_noise",
+        "scheduling": "joint",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 4,
+        "unique_recovery_observations": 4,
+        "unique_violating_observations": 1,
+        "witness_replay": {
+          "events": [
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "noise",
+                "value": 1
+              },
+              "pc": 0
+            },
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "source",
+                "value": 1
+              },
+              "pc": 1
+            },
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "signal",
+                "target": "ready",
+                "value": null
+              },
+              "pc": 2
+            },
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "noise",
+                "value": 2
+              },
+              "pc": 3
+            },
+            {
+              "actor": 1,
+              "instruction": {
+                "kind": "wait",
+                "target": "ready",
+                "value": null
+              },
+              "pc": 0
+            },
+            {
+              "actor": 1,
+              "instruction": {
+                "kind": "read",
+                "target": "source",
+                "value": "seen"
+              },
+              "pc": 1
+            },
+            {
+              "actor": 1,
+              "instruction": {
+                "kind": "copy",
+                "target": "manifest",
+                "value": "seen"
+              },
+              "pc": 2
+            }
+          ],
+          "verified": true
+        }
+      },
+      "seed_cartesian": {
+        "complete_schedules": 1,
+        "complete_within_bound": true,
+        "coverage": "all admitted crash images",
+        "crash_evaluations": 35,
+        "crash_policy": "cartesian",
+        "deadlocked_prefixes": 0,
+        "first_witness": null,
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 10,
+        "program": "independent_noise",
+        "scheduling": "seed",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 9,
+        "unique_recovery_observations": 3,
+        "unique_violating_observations": 0,
+        "witness_replay": null
+      }
+    },
+    "publish_before_flush": {
+      "joint_cartesian": {
+        "complete_schedules": 5,
+        "complete_within_bound": true,
+        "coverage": "all admitted crash images",
+        "crash_evaluations": 34,
+        "crash_policy": "cartesian",
+        "deadlocked_prefixes": 0,
+        "first_witness": {
+          "actors": [
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "disk": {
+            "manifest": 1,
+            "source": 0
+          },
+          "persisted_prefixes": [
+            0,
+            1
+          ],
+          "preemptions": 1,
+          "recovered": {
+            "manifest": 1,
+            "source": 0
+          },
+          "violations": [
+            "manifest<=source"
+          ]
+        },
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 22,
+        "program": "publish_before_flush",
+        "scheduling": "joint",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 4,
+        "unique_recovery_observations": 4,
+        "unique_violating_observations": 1,
+        "witness_replay": {
+          "events": [
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "source",
+                "value": 1
+              },
+              "pc": 0
+            },
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "signal",
+                "target": "ready",
+                "value": null
+              },
+              "pc": 1
+            },
+            {
+              "actor": 1,
+              "instruction": {
+                "kind": "wait",
+                "target": "ready",
+                "value": null
+              },
+              "pc": 0
+            },
+            {
+              "actor": 1,
+              "instruction": {
+                "kind": "read",
+                "target": "source",
+                "value": "seen"
+              },
+              "pc": 1
+            },
+            {
+              "actor": 1,
+              "instruction": {
+                "kind": "copy",
+                "target": "manifest",
+                "value": "seen"
+              },
+              "pc": 2
+            }
+          ],
+          "verified": true
+        }
+      },
+      "joint_extrema": {
+        "complete_schedules": 5,
+        "complete_within_bound": true,
+        "coverage": "existence oracle for declared integer-order claims only",
+        "crash_evaluations": 22,
+        "crash_policy": "extrema",
+        "deadlocked_prefixes": 0,
+        "first_witness": {
+          "actors": [
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "disk": {
+            "manifest": 1,
+            "source": 0
+          },
+          "persisted_prefixes": [
+            0,
+            1
+          ],
+          "preemptions": 1,
+          "recovered": {
+            "manifest": 1,
+            "source": 0
+          },
+          "violations": [
+            "manifest<=source"
+          ]
+        },
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 22,
+        "program": "publish_before_flush",
+        "scheduling": "joint",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 4,
+        "unique_recovery_observations": 4,
+        "unique_violating_observations": 1,
+        "witness_replay": {
+          "events": [
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "source",
+                "value": 1
+              },
+              "pc": 0
+            },
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "signal",
+                "target": "ready",
+                "value": null
+              },
+              "pc": 1
+            },
+            {
+              "actor": 1,
+              "instruction": {
+                "kind": "wait",
+                "target": "ready",
+                "value": null
+              },
+              "pc": 0
+            },
+            {
+              "actor": 1,
+              "instruction": {
+                "kind": "read",
+                "target": "source",
+                "value": "seen"
+              },
+              "pc": 1
+            },
+            {
+              "actor": 1,
+              "instruction": {
+                "kind": "copy",
+                "target": "manifest",
+                "value": "seen"
+              },
+              "pc": 2
+            }
+          ],
+          "verified": true
+        }
+      },
+      "seed_cartesian": {
+        "complete_schedules": 1,
+        "complete_within_bound": true,
+        "coverage": "all admitted crash images",
+        "crash_evaluations": 11,
+        "crash_policy": "cartesian",
+        "deadlocked_prefixes": 0,
+        "first_witness": null,
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 8,
+        "program": "publish_before_flush",
+        "scheduling": "seed",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 3,
+        "unique_recovery_observations": 3,
+        "unique_violating_observations": 0,
+        "witness_replay": null
+      }
+    },
+    "self_validating_cache": {
+      "joint_cartesian": {
+        "complete_schedules": 5,
+        "complete_within_bound": true,
+        "coverage": "all admitted crash images",
+        "crash_evaluations": 34,
+        "crash_policy": "cartesian",
+        "deadlocked_prefixes": 0,
+        "first_witness": null,
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 22,
+        "program": "self_validating_cache",
+        "scheduling": "joint",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 4,
+        "unique_recovery_observations": 4,
+        "unique_violating_observations": 0,
+        "witness_replay": null
+      },
+      "joint_extrema": {
+        "complete_schedules": 5,
+        "complete_within_bound": true,
+        "coverage": "existence oracle for declared integer-order claims only",
+        "crash_evaluations": 22,
+        "crash_policy": "extrema",
+        "deadlocked_prefixes": 0,
+        "first_witness": null,
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 22,
+        "program": "self_validating_cache",
+        "scheduling": "joint",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 4,
+        "unique_recovery_observations": 4,
+        "unique_violating_observations": 0,
+        "witness_replay": null
+      },
+      "seed_cartesian": {
+        "complete_schedules": 1,
+        "complete_within_bound": true,
+        "coverage": "all admitted crash images",
+        "crash_evaluations": 11,
+        "crash_policy": "cartesian",
+        "deadlocked_prefixes": 0,
+        "first_witness": null,
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 8,
+        "program": "self_validating_cache",
+        "scheduling": "seed",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        "unique_raw_images": 3,
+        "unique_recovery_observations": 3,
+        "unique_violating_observations": 0,
+        "witness_replay": null
+      }
+    },
+    "single_process_missing_flush": {
+      "joint_cartesian": {
+        "complete_schedules": 1,
+        "complete_within_bound": true,
+        "coverage": "all admitted crash images",
+        "crash_evaluations": 9,
+        "crash_policy": "cartesian",
+        "deadlocked_prefixes": 0,
+        "first_witness": {
+          "actors": [
+            0,
+            0
+          ],
+          "disk": {
+            "manifest": 1,
+            "source": 0
+          },
+          "persisted_prefixes": [
+            0,
+            1
+          ],
+          "preemptions": 0,
+          "recovered": {
+            "manifest": 1,
+            "source": 0
+          },
+          "violations": [
+            "manifest<=source"
+          ]
+        },
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 4,
+        "program": "single_process_missing_flush",
+        "scheduling": "joint",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0
+        ],
+        "unique_raw_images": 4,
+        "unique_recovery_observations": 4,
+        "unique_violating_observations": 1,
+        "witness_replay": {
+          "events": [
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "source",
+                "value": 1
+              },
+              "pc": 0
+            },
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "manifest",
+                "value": 1
+              },
+              "pc": 1
+            }
+          ],
+          "verified": true
+        }
+      },
+      "joint_extrema": {
+        "complete_schedules": 1,
+        "complete_within_bound": true,
+        "coverage": "existence oracle for declared integer-order claims only",
+        "crash_evaluations": 4,
+        "crash_policy": "extrema",
+        "deadlocked_prefixes": 0,
+        "first_witness": {
+          "actors": [
+            0,
+            0
+          ],
+          "disk": {
+            "manifest": 1,
+            "source": 0
+          },
+          "persisted_prefixes": [
+            0,
+            1
+          ],
+          "preemptions": 0,
+          "recovered": {
+            "manifest": 1,
+            "source": 0
+          },
+          "violations": [
+            "manifest<=source"
+          ]
+        },
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 4,
+        "program": "single_process_missing_flush",
+        "scheduling": "joint",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0
+        ],
+        "unique_raw_images": 2,
+        "unique_recovery_observations": 2,
+        "unique_violating_observations": 1,
+        "witness_replay": {
+          "events": [
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "source",
+                "value": 1
+              },
+              "pc": 0
+            },
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "manifest",
+                "value": 1
+              },
+              "pc": 1
+            }
+          ],
+          "verified": true
+        }
+      },
+      "seed_cartesian": {
+        "complete_schedules": 1,
+        "complete_within_bound": true,
+        "coverage": "all admitted crash images",
+        "crash_evaluations": 9,
+        "crash_policy": "cartesian",
+        "deadlocked_prefixes": 0,
+        "first_witness": {
+          "actors": [
+            0,
+            0
+          ],
+          "disk": {
+            "manifest": 1,
+            "source": 0
+          },
+          "persisted_prefixes": [
+            0,
+            1
+          ],
+          "preemptions": 0,
+          "recovered": {
+            "manifest": 1,
+            "source": 0
+          },
+          "violations": [
+            "manifest<=source"
+          ]
+        },
+        "max_preemptions": 2,
+        "no_crash_violations": 0,
+        "preemption_pruned_branches": 0,
+        "prefixes": 4,
+        "program": "single_process_missing_flush",
+        "scheduling": "seed",
+        "seed_or_first_complete_schedule": [
+          0,
+          0,
+          0
+        ],
+        "unique_raw_images": 4,
+        "unique_recovery_observations": 4,
+        "unique_violating_observations": 1,
+        "witness_replay": {
+          "events": [
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "source",
+                "value": 1
+              },
+              "pc": 0
+            },
+            {
+              "actor": 0,
+              "instruction": {
+                "kind": "write",
+                "target": "manifest",
+                "value": 1
+              },
+              "pc": 1
+            }
+          ],
+          "verified": true
+        }
+      }
+    }
+  },
+  "schema": "durability-debt-probe/1",
+  "scope": "finite independent atomic-record model only"
+}
