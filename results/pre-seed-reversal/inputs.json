@@ -1,0 +1,362 @@
+{
+  "programs": [
+    {
+      "actors": [
+        [
+          {
+            "kind": "write",
+            "target": "source",
+            "value": 1
+          },
+          {
+            "kind": "signal",
+            "target": "ready",
+            "value": null
+          },
+          {
+            "kind": "flush",
+            "target": "source",
+            "value": null
+          }
+        ],
+        [
+          {
+            "kind": "wait",
+            "target": "ready",
+            "value": null
+          },
+          {
+            "kind": "read",
+            "target": "source",
+            "value": "seen"
+          },
+          {
+            "kind": "copy",
+            "target": "manifest",
+            "value": "seen"
+          },
+          {
+            "kind": "flush",
+            "target": "manifest",
+            "value": null
+          }
+        ]
+      ],
+      "claims": [
+        {
+          "dependent": "manifest",
+          "discard_invalid": false,
+          "source": "source"
+        }
+      ],
+      "initial": [
+        [
+          "source",
+          0
+        ],
+        [
+          "manifest",
+          0
+        ]
+      ],
+      "name": "publish_before_flush"
+    },
+    {
+      "actors": [
+        [
+          {
+            "kind": "write",
+            "target": "source",
+            "value": 1
+          },
+          {
+            "kind": "flush",
+            "target": "source",
+            "value": null
+          },
+          {
+            "kind": "signal",
+            "target": "ready",
+            "value": null
+          }
+        ],
+        [
+          {
+            "kind": "wait",
+            "target": "ready",
+            "value": null
+          },
+          {
+            "kind": "read",
+            "target": "source",
+            "value": "seen"
+          },
+          {
+            "kind": "copy",
+            "target": "manifest",
+            "value": "seen"
+          },
+          {
+            "kind": "flush",
+            "target": "manifest",
+            "value": null
+          }
+        ]
+      ],
+      "claims": [
+        {
+          "dependent": "manifest",
+          "discard_invalid": false,
+          "source": "source"
+        }
+      ],
+      "initial": [
+        [
+          "source",
+          0
+        ],
+        [
+          "manifest",
+          0
+        ]
+      ],
+      "name": "flush_before_publish"
+    },
+    {
+      "actors": [
+        [
+          {
+            "kind": "write",
+            "target": "source",
+            "value": 1
+          },
+          {
+            "kind": "signal",
+            "target": "ready",
+            "value": null
+          },
+          {
+            "kind": "flush",
+            "target": "source",
+            "value": null
+          }
+        ],
+        [
+          {
+            "kind": "wait",
+            "target": "ready",
+            "value": null
+          },
+          {
+            "kind": "read",
+            "target": "source",
+            "value": "unused"
+          },
+          {
+            "kind": "write",
+            "target": "log",
+            "value": 1
+          },
+          {
+            "kind": "flush",
+            "target": "log",
+            "value": null
+          }
+        ]
+      ],
+      "claims": [],
+      "initial": [
+        [
+          "source",
+          0
+        ],
+        [
+          "log",
+          0
+        ]
+      ],
+      "name": "independent_logger"
+    },
+    {
+      "actors": [
+        [
+          {
+            "kind": "write",
+            "target": "source",
+            "value": 1
+          },
+          {
+            "kind": "signal",
+            "target": "ready",
+            "value": null
+          },
+          {
+            "kind": "flush",
+            "target": "source",
+            "value": null
+          }
+        ],
+        [
+          {
+            "kind": "wait",
+            "target": "ready",
+            "value": null
+          },
+          {
+            "kind": "read",
+            "target": "source",
+            "value": "seen"
+          },
+          {
+            "kind": "copy",
+            "target": "manifest",
+            "value": "seen"
+          },
+          {
+            "kind": "flush",
+            "target": "manifest",
+            "value": null
+          }
+        ]
+      ],
+      "claims": [
+        {
+          "dependent": "manifest",
+          "discard_invalid": true,
+          "source": "source"
+        }
+      ],
+      "initial": [
+        [
+          "source",
+          0
+        ],
+        [
+          "manifest",
+          0
+        ]
+      ],
+      "name": "self_validating_cache"
+    },
+    {
+      "actors": [
+        [
+          {
+            "kind": "write",
+            "target": "source",
+            "value": 1
+          },
+          {
+            "kind": "write",
+            "target": "manifest",
+            "value": 1
+          },
+          {
+            "kind": "flush",
+            "target": "manifest",
+            "value": null
+          }
+        ]
+      ],
+      "claims": [
+        {
+          "dependent": "manifest",
+          "discard_invalid": false,
+          "source": "source"
+        }
+      ],
+      "initial": [
+        [
+          "source",
+          0
+        ],
+        [
+          "manifest",
+          0
+        ]
+      ],
+      "name": "single_process_missing_flush"
+    },
+    {
+      "actors": [
+        [
+          {
+            "kind": "write",
+            "target": "noise",
+            "value": 1
+          },
+          {
+            "kind": "write",
+            "target": "source",
+            "value": 1
+          },
+          {
+            "kind": "signal",
+            "target": "ready",
+            "value": null
+          },
+          {
+            "kind": "write",
+            "target": "noise",
+            "value": 2
+          },
+          {
+            "kind": "flush",
+            "target": "source",
+            "value": null
+          }
+        ],
+        [
+          {
+            "kind": "wait",
+            "target": "ready",
+            "value": null
+          },
+          {
+            "kind": "read",
+            "target": "source",
+            "value": "seen"
+          },
+          {
+            "kind": "copy",
+            "target": "manifest",
+            "value": "seen"
+          },
+          {
+            "kind": "flush",
+            "target": "manifest",
+            "value": null
+          }
+        ]
+      ],
+      "claims": [
+        {
+          "dependent": "manifest",
+          "discard_invalid": false,
+          "source": "source"
+        }
+      ],
+      "initial": [
+        [
+          "source",
+          0
+        ],
+        [
+          "manifest",
+          0
+        ],
+        [
+          "noise",
+          0
+        ]
+      ],
+      "name": "independent_noise"
+    }
+  ],
+  "schema": "durability-debt-probe/1",
+  "settings": {
+    "max_crash_evaluations": 250000,
+    "max_preemptions": 2,
+    "max_prefixes": 50000
+  }
+}

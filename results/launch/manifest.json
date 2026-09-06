@@ -1,0 +1,23 @@
+{
+  "artifacts_sha256": {
+    "inputs.json": "a86a07f2165ae12fc4a75f4f7563d2557f6b05d46625c5d7f9d110de31e0281b",
+    "report.json": "5bb237f3a7335382464c8ab4aa48afb86ec2e4c6e72771c4728ce601eee61f0f"
+  },
+  "environment": {
+    "implementation": "CPython",
+    "platform": "Linux-7.1.13-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "python": "3.14.7 (main, Aug 10 2026, 00:00:00) [GCC 16.1.1 20260515 (Red Hat 16.1.1-2)]"
+  },
+  "finished_utc": "2026-09-06T00:49:10.013777+00:00",
+  "schema": "durability-debt-probe/1",
+  "source_sha256": {
+    "durability_debt/__init__.py": "56c96141da3eb6a657ffca15f6b8a7685cbaf51ef6bda73cba36e3f8223fface",
+    "durability_debt/__main__.py": "2d131ced9abf5d29aa85ac6abbb518f599d6178915cc949ec89988a1956d749b",
+    "durability_debt/cases.py": "16644fee4325a1adb4c8f723dd1b94dcdd36bfe9960aa2e6412d991b31a34ff4",
+    "durability_debt/explore.py": "b592417e4feaeaf3d1b6183dbdf1495b3e04622759ccf1600a42257c0340b7da",
+    "durability_debt/model.py": "274ff6547662c906e3808c0070de5ed6a61ac6dbf64eba47491cc2aec8bfafd1",
+    "durability_debt/probe.py": "3de62cdcc3edca8b6d7140846f2e8e1f9013f09eb5c1fae2e0cf628f0de12f5b"
+  },
+  "started_utc": "2026-09-06T00:49:09.994882+00:00",
+  "status": "completed"
+}
