@@ -12,6 +12,12 @@ def cases() -> tuple[Program, ...]:
     return (
         Program("publish_before_flush", initial, (unsafe, consumer), claim),
         Program("flush_before_publish", initial, (safe, consumer), claim),
+        Program("old_version_consumer", initial,
+                ((I("wait", "old_read"), I("write", "source", 1), I("signal", "ready"), I("flush", "source")),
+                 (I("read", "source", "old"), I("signal", "old_read"), I("wait", "ready"),
+                  I("copy", "manifest", "old"), I("flush", "manifest"))), claim),
+        Program("no_relevant_sink", initial,
+                (unsafe, (I("wait", "ready"), I("read", "source", "unused"))), claim),
         # A dirty read does not make a later independent log a semantic bug.
         Program("independent_logger", (("source", 0), ("log", 0)),
                 (unsafe, (I("wait", "ready"), I("read", "source", "unused"),
