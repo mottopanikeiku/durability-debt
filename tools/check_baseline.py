@@ -1,4 +1,4 @@
-"""Validate the handoff DAG, local links, and canonical evidence bindings."""
+"""Validate the archived research DAG, local links, and original evidence."""
 import hashlib
 import json
 from pathlib import Path
@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def check() -> dict:
-    graph = json.loads((ROOT / "workflow/graph.json").read_text())
+    graph = json.loads((ROOT / "docs/workflow/graph.json").read_text())
     nodes = {node["id"]: node for node in graph["nodes"]}
     if len(nodes) != len(graph["nodes"]):
         raise ValueError("duplicate graph node")
@@ -38,7 +38,9 @@ def check() -> dict:
             if path.is_absolute() or ".." in path.parts or output in outputs:
                 raise ValueError(f"unsafe or multiply owned output: {output}")
             outputs.add(output)
-            if node["status"] == "completed" and not (ROOT / path).is_file():
+            archived = path.parts[0] in {"research", "workflow"} or output in {"AGENTS.md", "NEXT_STEPS.md"}
+            location = ROOT / "docs" / path if archived else ROOT / path
+            if node["status"] == "completed" and not location.is_file():
                 raise ValueError(f"completed output missing: {output}")
         visiting.remove(name)
         visited.add(name)
@@ -48,7 +50,7 @@ def check() -> dict:
     next_node = nodes[graph["next_node"]]
     if next_node["status"] != "pending" or any(nodes[name]["status"] != "completed" for name in next_node["depends_on"]):
         raise ValueError("next research node is not actionable")
-    for document in [ROOT / "README.md", ROOT / "AGENTS.md", ROOT / "NEXT_STEPS.md", *sorted((ROOT / "research").glob("*.md"))]:
+    for document in [ROOT / "README.md", ROOT / "AGENTS.md", *sorted((ROOT / "docs").rglob("*.md"))]:
         for target in re.findall(r"\[[^\]]*\]\(([^)]+)\)", document.read_text()):
             if "://" in target or target.startswith(("#", "mailto:")):
                 continue
@@ -63,9 +65,9 @@ def check() -> dict:
     for filename, digest in manifest["artifacts_sha256"].items():
         if hashlib.sha256((ROOT / "results/launch" / filename).read_bytes()).hexdigest() != digest:
             raise ValueError(f"canonical artifact changed: {filename}")
-    json.loads((ROOT / "research/SOURCES.json").read_text())
+    json.loads((ROOT / "docs/research/SOURCES.json").read_text())
     return {"valid": True, "nodes": len(nodes), "completed": sum(node["status"] == "completed" for node in nodes.values()),
-            "next_node": graph["next_node"], "scope": "structural handoff and evidence integrity, not thesis acceptance"}
+            "next_node": graph["next_node"], "scope": "archived research structure and evidence integrity, not current project direction"}
 
 
 if __name__ == "__main__":
