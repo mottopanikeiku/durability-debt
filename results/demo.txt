@@ -1,0 +1,19 @@
+Finite atomic-record model; at most two preemptions.
+Case                  Search                Schedules  Crash checks  Bad observations
+publish_before_flush  producer-first trace          1            11                 0
+publish_before_flush  consumer-first trace          1            16                 1
+publish_before_flush  joint exploration             5            34                 1
+flush_before_publish  joint exploration             1            10                 0
+
+Replayed failing prefix after consumer flush (source is still unflushed):
+  producer: write source 1
+  producer: signal ready
+  consumer: wait ready
+  consumer: read source seen
+  consumer: copy manifest seen
+  consumer: flush manifest
+  crash image: source=0, manifest=1
+  recovery requires manifest <= source; violated: manifest<=source
+
+Fix: write source -> flush source -> signal ready.
+The consumer-first single-trace baseline finds the same failure; no novelty or speedup claim.
