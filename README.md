@@ -1,39 +1,63 @@
 # Durability Debt
 
-**Joint schedule-and-crash exploration for cross-process recovery correctness.**
+A small Python demo of a producer publishing data before it is durable, leaving a consumer's saved result without its input after a crash.
 
-A producer can publish data before making it durable. A consumer can read that data and persist a dependent result. A crash may preserve the result while losing its input. Individually correct components do not necessarily compose into a crash-correct workflow.
+**Question:** how can a schedule that looks correct without a crash break recovery?
 
-## Research question
+[model.py](durability_debt/model.py) interprets atomic integer records, volatile signals, and per-record flushes. [explore.py](durability_debt/explore.py) enumerates bounded schedules and allowed crash images, then replays a failing witness. [cases.py](durability_debt/cases.py) defines the unsafe handoff, its fix, and synthetic controls.
 
-Can persistence-sensitive joint schedule/crash exploration find reproducible recovery failures in unmodified local Linux workflows substantially more efficiently than strong one-trace and composed schedule/crash baselines?
+## The race and the fix
 
-This is a **conditional research launch**, not a claim of established novelty or a completed Linux tester. Visible-before-durable races, persistence graphs, and joint concurrency/persistence model checking already exist. The closest threats are PerSeVerE, PMRace, DURINN, ALICE, Pathfinder, and RACEPRO. A useful wrapper is not automatically a new thesis.
+Initially, both `source` and `manifest` contain the old version. The recovery rule is `manifest <= source`: a saved result must not refer to a source version that was lost.
 
-## What is executable now
-
-The repository contains a dependency-free finite reference model, exhaustive schedule/crash oracle, seed-schedule baseline, and a deliberately strong elementary extrema baseline. It tests existing atomic records, volatile handoff, and honored per-record flushes. It does **not** execute native applications or model ext4, SQLite internals, namespace operations, torn writes, or mmap.
-
-```sh
-python3 -m durability_debt probe --output /tmp/durability-debt-probe
-python3 -m unittest discover -s tests -v
+```text
+Producer                       Consumer
+write source = 1
+signal ready ----------------> wait ready
+                               read source = 1
+                               write manifest = 1
+                               flush manifest
+                 CRASH before producer flushes source
 ```
 
-The probe creates a new immutable run directory; it refuses to overwrite an existing one. Inspect its `report.json` and `manifest.json`. Results distinguish repeated observations from unique recovery images and do not count synthetic witnesses as real bugs.
+The allowed crash image is **`source=0, manifest=1`**. Recovery keeps these values, violating the rule: the consumer's result survived but its input did not. The signal made the write visible, not durable.
 
-## Start here
+**Fix:** change the producer to `write source; flush source; signal ready`. The consumer cannot see the new version until it is forced to survive a modeled crash.
 
-1. [AGENTS.md](AGENTS.md): operational and authorship contract.
-2. [NEXT_STEPS.md](NEXT_STEPS.md): exact successor entry point and stop conditions.
-3. [research/THESIS.md](research/THESIS.md): provisional thesis and claim boundary.
-4. [research/SELECTION.md](research/SELECTION.md): alternatives and adversarial selection.
-5. [research/PRIOR_ART.md](research/PRIOR_ART.md): strongest existing work.
-6. [research/PROTOCOL.md](research/PROTOCOL.md): preregistered experiments and kill gates.
-7. [workflow/graph.json](workflow/graph.json): dependency DAG, owners, inputs, outputs, acceptance.
-8. [research/CLAIMS.md](research/CLAIMS.md) and [research/LOOP_LOG.md](research/LOOP_LOG.md): verified state, failed branches, and next decisions.
+## Result
 
-## Success and failure
+The [saved explorer report](results/launch/report.json) gives these counts. Crash checks include repeated images at different execution prefixes; bad observations are distinct recovery outcomes, not separate bugs.
 
-A positive thesis requires a substantive capability/reduction beyond ordinary tool composition, semantic recovery witnesses in unmodified real workflows, and fair matched-baseline evidence. A negative result is valid: preserve the artifact and explain which novelty, feasibility, or usefulness gate failed. Do not manufacture significance by weakening baselines, injecting faults into real subjects, or changing the question after seeing results.
+| Case / search | Complete schedules | Crash checks | Bad observations |
+|---|---:|---:|---:|
+| Publish first, producer-first trace | 1 | 11 | 0 |
+| Publish first, consumer-first trace | 1 | 16 | 1 |
+| Publish first, joint exploration | 5 | 34 | 1 |
+| Flush first, joint exploration | 1 | 10 | 0 |
 
-Sole human author: **mottopanikeiku (alp)**. MIT license. AI assistance is used in research and implementation; it does not create additional human authors. All third-party work retains its attribution and license.
+The producer-first trace misses the race. **A simple consumer-first single-trace baseline finds it too.** This demonstrates schedule sensitivity, not a new detection algorithm or an advantage over strong baselines.
+
+## Reproduce
+
+From this checkout, with Python 3.11 or newer and its standard library:
+
+```sh
+nice -n 19 python3 tools/demo.py
+nice -n 19 python3 -m unittest discover -s tests -v
+```
+
+The demo prints the table, a replayed instruction trace, the crash image, and the fix. A local CPU is enough; no GPU, downloads, paid services, or application data are used. Hardware and model boundaries are documented in the [project notes](docs/README.md), together with the preserved research charter and full probe instructions.
+
+## Limitations
+
+- Synthetic examples, not bugs discovered in real applications.
+- Atomic whole-record writes and independent record persistence; no torn writes or filesystem metadata.
+- Exploration allows at most two preemptions, not all possible schedules.
+- No native processes, ext4, SQLite, mmap, or physical power-loss experiments.
+- Flush-before-publication fixes this model, not every real storage protocol.
+
+## Prior work and authorship
+
+The visibility-before-durability problem is established in [PMRace](https://github.com/yhuacode/pmrace) and [DURINN](https://www.usenix.org/system/files/osdi22-fu.pdf). [PerSeVerE](https://plv.mpi-sws.org/persevere/) explores concurrency and persistence together; [ALICE](https://github.com/madthanu/alice) constructs application crash states. This is an independently authored teaching model, not a reproduction of their implementations.
+
+Alp Cetin (`mottopanikeiku`), MIT license. AI assistance was used in research and implementation.

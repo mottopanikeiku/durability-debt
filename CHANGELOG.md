@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-10-05
+
+- Present the project as a small synthetic crash-recovery demo, not a native tester or a demonstrated new method.
+- Add `tools/demo.py` to print the unsafe handoff, replay its crash witness, compare both single-trace baselines, and show the safe ordering.
+- Move the research charter, workflow graph, and original agent/handoff instructions into `docs/`; retain both historical result bundles unchanged.
+- Add a regression for the runnable demonstration and keep the archived baseline check working with the moved files.
+
 ## 0.1.0 — 2026-09-05
 
 - Established a new conditional research project after six candidate investigations and two hostile challenges; preserved nearest-prior-art collisions and explicit kill criteria.

@@ -2,6 +2,8 @@ import copy
 import json
 from pathlib import Path
 import tempfile
+import subprocess
+import sys
 import unittest
 from unittest.mock import patch
 
@@ -97,6 +99,18 @@ class ReferenceTests(unittest.TestCase):
         witness["disk"]["source"] = 99
         with self.assertRaises(ValueError):
             replay_witness(program, witness)
+
+    def test_demo_prints_replayed_crash_and_credits_single_trace(self):
+        root = Path(__file__).resolve().parents[1]
+        completed = subprocess.run(
+            [sys.executable, str(root / "tools/demo.py")],
+            cwd=root, capture_output=True, text=True, check=True,
+        )
+        self.assertIn("consumer: flush manifest", completed.stdout)
+        self.assertIn("crash image: source=0, manifest=1", completed.stdout)
+        self.assertIn("violated: manifest<=source", completed.stdout)
+        self.assertIn("write source -> flush source -> signal ready", completed.stdout)
+        self.assertIn("consumer-first single-trace baseline finds the same failure", completed.stdout)
 
     def test_unsupported_operations_fail_closed(self):
         with self.assertRaises(ValueError):
