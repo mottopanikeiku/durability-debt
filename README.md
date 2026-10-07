@@ -1,32 +1,34 @@
 # Durability Debt
 
-A small Python demo of a producer publishing data before it is durable, leaving a consumer's saved result without its input after a crash.
+I built a small crash-recovery teaching demo about a write that becomes visible before it becomes durable.
 
-**Question:** how can a schedule that looks correct without a crash break recovery?
+**Question:** how can a schedule that looks correct without a crash leave a saved result without its input?
 
-[model.py](durability_debt/model.py) interprets atomic integer records, volatile signals, and per-record flushes. [explore.py](durability_debt/explore.py) enumerates bounded schedules and allowed crash images, then replays a failing witness. [cases.py](durability_debt/cases.py) defines the unsafe handoff, its fix, and synthetic controls.
+The browser lesson steps through an unsafe producer/consumer handoff and its fix. At each instruction boundary it shows every disk state the finite model allows, and whether recovery accepts it. I generate the events, crash states, and comparison counts from [the model](durability_debt/model.py) and [the explorer](durability_debt/explore.py), not from a hand-written animation.
 
-## The race and the fix
+Build the page below, then open `_site/index.html`. It works offline, needs no JavaScript framework, and includes the full boundary tables even with JavaScript disabled. The [page generator](tools/build_site.py) also exports `scenario.json` with source hashes.
 
-Initially, both `source` and `manifest` contain the old version. The recovery rule is `manifest <= source`: a saved result must not refer to a source version that was lost.
+## What the demo teaches
+
+In [the modeled cases](durability_debt/cases.py), both `source` and `manifest` start at version `0`. Recovery requires `manifest <= source`: a saved result must not refer to an input version that disappeared.
 
 ```text
 Producer                       Consumer
 write source = 1
 signal ready ----------------> wait ready
                                read source = 1
-                               write manifest = 1
+                               copy manifest from read
                                flush manifest
                  CRASH before producer flushes source
 ```
 
-The allowed crash image is **`source=0, manifest=1`**. Recovery keeps these values, violating the rule: the consumer's result survived but its input did not. The signal made the write visible, not durable.
+The explorer finds a witness allowing **`source=0, manifest=1`** ([saved witness](results/launch/report.json)). I replay that witness through the consumer's flush, then finish the schedule. At the failing boundary, the consumer's result must survive but the source may not. At the final boundary, both records are flushed and recovery is valid again. A correct ending does not make every earlier crash safe.
 
-**Fix:** change the producer to `write source; flush source; signal ready`. The consumer cannot see the new version until it is forced to survive a modeled crash.
+**Fix:** `write source; flush source; signal ready`. The consumer cannot read the new version until it is forced to survive a modeled crash. The page lets you compare both orderings and inspect the allowed crash images rather than just watching the failure.
 
 ## Result
 
-The [saved explorer report](results/launch/report.json) gives these counts. Crash checks include repeated images at different execution prefixes; bad observations are distinct recovery outcomes, not separate bugs.
+The [saved explorer report](results/launch/report.json) records these counts. The page regenerates them with the same search settings. Crash checks include repeated images at different execution prefixes; bad observations are distinct recovery outcomes, not separate bugs.
 
 | Case / search | Complete schedules | Crash checks | Bad observations |
 |---|---:|---:|---:|
@@ -35,29 +37,32 @@ The [saved explorer report](results/launch/report.json) gives these counts. Cras
 | Publish first, joint exploration | 5 | 34 | 1 |
 | Flush first, joint exploration | 1 | 10 | 0 |
 
-The producer-first trace misses the race. **A simple consumer-first single-trace baseline finds it too.** This demonstrates schedule sensitivity, not a new detection algorithm or an advantage over strong baselines.
+The producer-first trace misses the race. **A consumer-first single-trace baseline finds it too.** I demonstrate schedule sensitivity, not a new detection algorithm or a speedup.
 
 ## Reproduce
 
-From this checkout, with Python 3.11 or newer and its standard library:
+From a checkout, with Python 3.11 or newer and its standard library:
 
 ```sh
+nice -n 19 python3 tools/build_site.py --output _site
 nice -n 19 python3 tools/demo.py
 nice -n 19 python3 -m unittest discover -s tests -v
 ```
 
-The demo prints the table, a replayed instruction trace, the crash image, and the fix. A local CPU is enough; no GPU, downloads, paid services, or application data are used. Hardware and model boundaries are documented in the [project notes](docs/README.md), together with the preserved research charter and full probe instructions.
+Open `_site/index.html` for the lesson. A local CPU is enough; no GPU, downloads, paid services, or application data are used. The [project notes](docs/README.md) cover the full probe, historical records, and owner-controlled Pages deployment. No Pages URL is promised before deployment is enabled.
 
 ## Limitations
 
 - Synthetic examples, not bugs discovered in real applications.
-- Atomic whole-record writes and independent record persistence; no torn writes or filesystem metadata.
-- Exploration allows at most two preemptions, not all possible schedules.
+- Atomic whole-record writes and independent persistence; no torn writes or filesystem metadata.
+- Exploration allows at most two preemptions ([search default](durability_debt/explore.py)), not all possible schedules.
 - No native processes, ext4, SQLite, mmap, or physical power-loss experiments.
 - Flush-before-publication fixes this model, not every real storage protocol.
 
 ## Prior work and authorship
 
-The visibility-before-durability problem is established in [PMRace](https://github.com/yhuacode/pmrace) and [DURINN](https://www.usenix.org/system/files/osdi22-fu.pdf). [PerSeVerE](https://plv.mpi-sws.org/persevere/) explores concurrency and persistence together; [ALICE](https://github.com/madthanu/alice) constructs application crash states. This is an independently authored teaching model, not a reproduction of their implementations.
+The visibility-before-durability problem is established in [PMRace](https://github.com/yhuacode/pmrace) and [DURINN](https://www.usenix.org/system/files/osdi22-fu.pdf). [PerSeVerE](https://plv.mpi-sws.org/persevere/) explores concurrency and persistence together; [ALICE](https://github.com/madthanu/alice) constructs application crash states. I wrote this teaching model independently; it is not a reproduction of their implementations.
 
-Alp Cetin (`mottopanikeiku`), MIT license. AI assistance was used in research and implementation.
+Alp Cetin (`mottopanikeiku`), MIT license.
+
+Written with AI coding assistance.
