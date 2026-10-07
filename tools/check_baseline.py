@@ -6,6 +6,9 @@ import re
 
 
 ROOT = Path(__file__).resolve().parents[1]
+# These historical graph outputs were instructions, not result evidence.
+# Keep the archived graph intact while accounting for their explicit removal.
+RETIRED_PROMPTS = {"AGENTS.md", "NEXT_STEPS.md"}
 
 
 def check() -> dict:
@@ -38,7 +41,9 @@ def check() -> dict:
             if path.is_absolute() or ".." in path.parts or output in outputs:
                 raise ValueError(f"unsafe or multiply owned output: {output}")
             outputs.add(output)
-            archived = path.parts[0] in {"research", "workflow"} or output in {"AGENTS.md", "NEXT_STEPS.md"}
+            if output in RETIRED_PROMPTS:
+                continue
+            archived = path.parts[0] in {"research", "workflow"}
             location = ROOT / "docs" / path if archived else ROOT / path
             if node["status"] == "completed" and not location.is_file():
                 raise ValueError(f"completed output missing: {output}")
@@ -58,13 +63,13 @@ def check() -> dict:
                 raise ValueError(f"broken local link in {document.name}: {target}")
     manifest = json.loads((ROOT / "results/launch/manifest.json").read_text())
     if manifest["status"] != "completed":
-        raise ValueError("canonical evidence did not complete")
+        raise ValueError("original evidence did not complete")
     for filename, digest in manifest["source_sha256"].items():
         if hashlib.sha256((ROOT / filename).read_bytes()).hexdigest() != digest:
-            raise ValueError(f"canonical source evidence is stale: {filename}")
+            raise ValueError(f"original source evidence is stale: {filename}")
     for filename, digest in manifest["artifacts_sha256"].items():
         if hashlib.sha256((ROOT / "results/launch" / filename).read_bytes()).hexdigest() != digest:
-            raise ValueError(f"canonical artifact changed: {filename}")
+            raise ValueError(f"original artifact changed: {filename}")
     json.loads((ROOT / "docs/research/SOURCES.json").read_text())
     return {"valid": True, "nodes": len(nodes), "completed": sum(node["status"] == "completed" for node in nodes.values()),
             "next_node": graph["next_node"], "scope": "archived research structure and evidence integrity, not current project direction"}

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-07
+
+- Add a dependency-free teaching page that steps through a replayed crash witness and the flush-before-publication fix, showing every admitted disk image at each boundary.
+- Generate the page, comparison counts, and downloadable data deterministically from the existing model and explorer; include source hashes and readable tables without JavaScript.
+- Add regressions for generation, recovery outcomes, witness replay, and the historical checker after removing obsolete prompt documents.
+- Build a Pages artifact on pull requests and main pushes; deploy only after explicit owner opt-in, without changing repository settings.
+- Delete `docs/AGENTS.md` and `docs/NEXT_STEPS.md`; keep the archived research graph and original result bundles unchanged.
+
 ## 2026-10-05
 
 - Present the project as a small synthetic crash-recovery demo, not a native tester or a demonstrated new method.
