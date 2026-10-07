@@ -18,7 +18,7 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Behavioral regressions
         run: python -m unittest discover -s tests -v
-      - name: Handoff and historical evidence integrity
+      - name: Archived structure and historical evidence integrity
         run: python tools/check_baseline.py
       - name: Fresh local-environment probe
         run: python -m durability_debt probe --output runs/ci
