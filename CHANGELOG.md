@@ -1,5 +1,13 @@
 # Changelog
 
+## 2026-10-08
+
+- Number the page's instruction timeline from boundary 0, matching the step counter and the no-JavaScript tables.
+- Show an accurate verdict where only one crash image is allowed, instead of saying a new version may be lost.
+- Test that `results/demo.txt` matches the demo's output and that the README result table matches the saved report.
+- Move the Pages artifact and deploy actions to their Node 24 releases; run reference CI on pull requests and `main` pushes only.
+- Describe the package in `pyproject.toml` as the teaching model the README presents.
+
 ## 2026-10-07
 
 - Add a dependency-free teaching page that steps through a replayed crash witness and the flush-before-publication fix, showing every admitted disk image at each boundary.

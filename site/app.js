@@ -70,9 +70,14 @@ function render() {
   document.getElementById("crash-count").textContent = `${point.crash_images.length} allowed`;
   const verdict = document.getElementById("verdict");
   verdict.className = `verdict ${failures ? "bad" : "good"}`;
-  verdict.textContent = failures
-    ? `${failures} allowed crash image violates recovery. The saved manifest can outlive its source.`
-    : "Every crash image at this boundary satisfies recovery. Losing an unreferenced new version is allowed.";
+  if (failures) {
+    const plural = failures === 1 ? "image violates" : "images violate";
+    verdict.textContent = `${failures} allowed crash ${plural} recovery. The saved manifest can outlive its source.`;
+  } else if (point.crash_images.length === 1) {
+    verdict.textContent = "Every written version is already forced, so only one crash image is allowed. It satisfies recovery.";
+  } else {
+    verdict.textContent = "Every crash image at this boundary satisfies recovery. Losing an unreferenced new version is allowed.";
+  }
 }
 
 previous.addEventListener("click", () => { boundary -= 1; render(); });
