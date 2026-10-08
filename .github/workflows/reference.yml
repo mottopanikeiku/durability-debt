@@ -1,9 +1,13 @@
 name: Finite reference artifact
 on:
   push:
+    branches: [main]
   pull_request:
 permissions:
   contents: read
+concurrency:
+  group: reference-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   reference:
     runs-on: ubuntu-latest
