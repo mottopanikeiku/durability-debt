@@ -111,6 +111,7 @@ class ReferenceTests(unittest.TestCase):
         self.assertIn("violated: manifest<=source", completed.stdout)
         self.assertIn("write source -> flush source -> signal ready", completed.stdout)
         self.assertIn("consumer-first single-trace baseline finds the same failure", completed.stdout)
+        self.assertEqual(completed.stdout, (root / "results/demo.txt").read_text())
 
     def test_unsupported_operations_fail_closed(self):
         with self.assertRaises(ValueError):
