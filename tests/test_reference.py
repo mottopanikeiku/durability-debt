@@ -111,6 +111,25 @@ class ReferenceTests(unittest.TestCase):
         self.assertIn("violated: manifest<=source", completed.stdout)
         self.assertIn("write source -> flush source -> signal ready", completed.stdout)
         self.assertIn("consumer-first single-trace baseline finds the same failure", completed.stdout)
+        self.assertEqual(completed.stdout, (root / "results/demo.txt").read_text())
+
+    def test_readme_result_table_matches_saved_report(self):
+        root = Path(__file__).resolve().parents[1]
+        archived = json.loads((root / "results/launch/report.json").read_text())["results"]
+        expected = {
+            "Publish first, producer-first trace": archived["publish_before_flush"]["seed_cartesian"],
+            "Publish first, consumer-first trace": archived["publish_before_flush"]["bad_seed_cartesian"],
+            "Publish first, joint exploration": archived["publish_before_flush"]["joint_cartesian"],
+            "Flush first, joint exploration": archived["flush_before_publish"]["joint_cartesian"],
+        }
+        rows = {}
+        for line in (root / "README.md").read_text().splitlines():
+            cells = [cell.strip() for cell in line.strip("|").split("|")]
+            if line.startswith("|") and cells[0] in expected:
+                rows[cells[0]] = [int(cell) for cell in cells[1:]]
+        self.assertEqual(rows, {label: [result["complete_schedules"], result["crash_evaluations"],
+                                        result["unique_violating_observations"]]
+                                for label, result in expected.items()})
 
     def test_unsupported_operations_fail_closed(self):
         with self.assertRaises(ValueError):
