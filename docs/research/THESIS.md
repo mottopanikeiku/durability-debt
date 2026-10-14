@@ -1,8 +1,8 @@
-# Provisional thesis and claim boundaries
+# Historical native-research proposal
 
 ## Decision and question
 
-**Conditionally selected for falsification, not established as novel or significant.**
+I did not carry out the native work proposed here.
 
 > Can persistence-sensitive joint schedule/crash exploration expose reproducible cross-process recovery failures in unmodified local Linux workflows substantially more efficiently than strong one-trace and composed schedule/crash baselines?
 

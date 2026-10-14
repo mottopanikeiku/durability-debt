@@ -40,7 +40,7 @@ cmp results/launch/report.json /tmp/durability-debt-launch-20260905/report.json
 
 **Observation:** 12 regression tests passed; both bundle checks passed; report bytes matched. Failure-cap and overwrite/tampering tests exercise refusal instead of misleading successful checkpoints. Canonical manifest binds source, inputs, settings, environment and artifact hashes.
 
-**Adjustment/decision:** retain `results/launch/`; remove disposable smoke artifacts after final verification. Read `NEXT_STEPS.md` and run the product/composition gate. Native FUSE/SQLite experiments, substantive reduction, real-workflow evidence and paper conclusions remain unexecuted.
+**Adjustment/decision:** retain `results/launch/`. Native FUSE/SQLite experiments, substantive reduction, real-workflow evidence and paper conclusions remain unexecuted.
 
 ## L3 — satisfy hostile seed-reversal and control requirements — 2026-09-05
 

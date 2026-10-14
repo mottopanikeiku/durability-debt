@@ -19,7 +19,7 @@ The controls support keyboard navigation, and the complete crash tables remain r
 
 The [Pages workflow](../.github/workflows/pages.yml) builds and uploads the page on pull requests and main-branch pushes. Those runs do not require Pages to be enabled. It uses the official checkout, Python setup, Pages artifact, and Pages deployment actions.
 
-After the owner enables Pages with **GitHub Actions** as the publishing source, run **Teaching page** manually on `main` with `deploy` checked. For automatic deployment on later main pushes, the owner can set the repository Actions variable `PAGES_ENABLED` to `true`. Deployment never runs for pull requests, and no workflow enables Pages or changes repository settings. A requested deployment still requires Pages and the `github-pages` environment to be configured; failures are not suppressed.
+I publish the [lesson](https://mottopanikeiku.github.io/durability-debt/) with GitHub Actions. To deploy manually, run **Teaching page** on `main` with `deploy` checked. Automatic deployment on main pushes uses the repository Actions variable `PAGES_ENABLED=true`; pull requests do not deploy.
 
 ## Run the full reference experiment
 
@@ -31,18 +31,14 @@ nice -n 19 python3 -m durability_debt verify /tmp/durability-debt-local-probe
 nice -n 19 python3 tools/check_baseline.py
 ```
 
-Choose a new output directory for each probe; existing directories are never overwritten. The first command runs the synthetic cases and both single-trace baselines, compares joint exploration in both traversal orders, and checks the elementary extrema comparator. The second checks that the new bundle matches its source, settings, environment, and artifact hashes. The last checks the preserved research graph, Markdown links, and original source/artifact hashes; it is not a scientific acceptance test.
+Choose a new output directory for each probe; existing directories are never overwritten. The first command runs the synthetic cases and both single-trace baselines, compares joint exploration in both traversal orders, and checks the elementary extrema comparator. The second checks the new bundle against its source, settings, environment, and artifact hashes. The last checks local Markdown links and original source/artifact hashes.
 
-No packages, GPU, paid services, or native fault injection are needed. Use a local CPU. The implementation bounds exploration at 50,000 prefixes and 250,000 crash evaluations per search; these limits are recorded in [probe.py](../durability_debt/probe.py). It raises an error rather than calling a capped search complete.
+I run `python3 tools/demo.py` and `python3 -m unittest discover -s tests -v` after behavior changes, using a local CPU with `nice -n 19`. I do not fault-inject against real user data, change host privileges, or overwrite result bundles. I keep published data, prior-work attribution, and the AI-assistance disclosure intact. The implementation bounds exploration at 50,000 prefixes and 250,000 crash evaluations per search; these limits are recorded in [probe.py](../durability_debt/probe.py). It raises an error rather than calling a capped search complete.
 
 ## Preserved records
 
-- [Model assumptions](research/MODEL.md), [original claims](research/CLAIMS.md), and [prior work](research/PRIOR_ART.md).
-- Original research proposal: [thesis](research/THESIS.md), [selection](research/SELECTION.md), [protocol](research/PROTOCOL.md), [baselines](research/BASELINES.md), [threats](research/THREATS.md), and [source catalog](research/SOURCES.json).
-- Historical decisions: [loop log](research/LOOP_LOG.md) and [workflow graph](workflow/graph.json).
+- [Historical native-research proposal](research/THESIS.md).
 - Unchanged result bundles: [launch](../results/launch/) and [earlier run](../results/pre-seed-reversal/).
-
-The research charter is historical, not current instructions to build a native backend or spend its proposed budgets. `research/` and `workflow/` paths in those records refer to files now under `docs/`; code, tools, tests, and results remain at the repository root. I removed the obsolete `docs/AGENTS.md` and `docs/NEXT_STEPS.md` prompts. The archived graph retains their names as historical outputs; `tools/check_baseline.py` explicitly excludes only those retired prompts from file-existence checks and still checks every other completed output. Original result bundles and source hashes are unchanged.
 
 Historical manifests bind the original environment. A refusal to reuse a saved bundle on another host is expected; read it as historical data and create a fresh local probe.
 

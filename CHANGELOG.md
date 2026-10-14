@@ -7,6 +7,8 @@
 - Test that `results/demo.txt` matches the demo's output and that the README result table matches the saved report.
 - Move the Pages artifact and deploy actions to their Node 24 releases; run reference CI on pull requests and `main` pushes only.
 - Describe the package in `pyproject.toml` as the teaching model the README presents.
+- Link the live lesson, keep the abandoned native proposal behind one historical link, and fold contributor notes into the project notes.
+- Remove the remaining agent instructions and successor graph; keep documentation-link and original result checks in CI.
 
 ## 2026-10-07
 

@@ -119,7 +119,8 @@ class SiteTests(unittest.TestCase):
             self.assertNotIn("${", page)
             self.assertNotIn(str(ROOT), page)
 
-    def test_archived_checker_allows_only_retired_prompts_to_be_absent(self):
+    def test_checker_requires_original_sources_without_agent_files(self):
+        self.assertFalse((ROOT / "AGENTS.md").exists())
         self.assertFalse((ROOT / "docs/AGENTS.md").exists())
         self.assertFalse((ROOT / "docs/NEXT_STEPS.md").exists())
         self.assertTrue(check()["valid"])
@@ -129,7 +130,7 @@ class SiteTests(unittest.TestCase):
             return False if path == ROOT / "durability_debt/model.py" else original(path)
 
         with patch.object(Path, "is_file", missing_model):
-            with self.assertRaisesRegex(ValueError, "completed output missing"):
+            with self.assertRaisesRegex(ValueError, "original source missing"):
                 check()
 
 

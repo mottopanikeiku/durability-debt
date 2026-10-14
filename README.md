@@ -6,7 +6,7 @@ I built a small crash-recovery teaching demo about a write that becomes visible 
 
 The browser lesson steps through an unsafe producer/consumer handoff and its fix. At each instruction boundary it shows every disk state the finite model allows, and whether recovery accepts it. I generate the events, crash states, and comparison counts from [the model](durability_debt/model.py) and [the explorer](durability_debt/explore.py), not from a hand-written animation.
 
-Build the page below, then open `_site/index.html`. It works offline, needs no JavaScript framework, and includes the full boundary tables even with JavaScript disabled. The [page generator](tools/build_site.py) also exports `scenario.json` with source hashes.
+[Open the lesson](https://mottopanikeiku.github.io/durability-debt/), or build it below and open `_site/index.html`. It works offline, needs no JavaScript framework, and includes the full boundary tables even with JavaScript disabled. The [page generator](tools/build_site.py) also exports `scenario.json` with source hashes.
 
 ## What the demo teaches
 
@@ -49,7 +49,7 @@ nice -n 19 python3 tools/demo.py
 nice -n 19 python3 -m unittest discover -s tests -v
 ```
 
-Open `_site/index.html` for the lesson. A local CPU is enough; no GPU, downloads, paid services, or application data are used. The [project notes](docs/README.md) cover the full probe, historical records, and owner-controlled Pages deployment. No Pages URL is promised before deployment is enabled.
+Open `_site/index.html` for the local lesson. The [project notes](docs/README.md) cover the full probe, historical records, and Pages deployment.
 
 ## Limitations
 
