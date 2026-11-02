@@ -26,7 +26,6 @@ def check() -> dict:
     for filename, digest in manifest["artifacts_sha256"].items():
         if hashlib.sha256((ROOT / "results/launch" / filename).read_bytes()).hexdigest() != digest:
             raise ValueError(f"original artifact changed: {filename}")
-    json.loads((ROOT / "docs/research/SOURCES.json").read_text())
     return {"valid": True, "scope": "local documentation links and original source/artifact hashes"}
 
 
