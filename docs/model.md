@@ -1,10 +1,10 @@
 # The model
 
-Records are atomic integers that persist independently of each other. Registers and signals are volatile and vanish in a crash. A crash can happen at any instruction boundary, and the explorer enumerates schedules with at most two preemptions. Torn writes, file-system metadata and real devices are outside the model. The code is in [model.py](../durability_debt/model.py), [explore.py](../durability_debt/explore.py) and [cases.py](../durability_debt/cases.py).
+Records are atomic integers that persist independently of each other, while registers and signals are volatile and vanish in a crash. A crash can happen at any instruction boundary, and the explorer enumerates schedules with at most two preemptions. Torn writes, file-system metadata and real devices are outside the model. The code is in [model.py](../durability_debt/model.py), [explore.py](../durability_debt/explore.py) and [cases.py](../durability_debt/cases.py).
 
 ## State and instructions
 
-A program has one or two actors, integer records and recovery claims. Each record keeps its write history and a forced-persistence index.
+A program has one or two actors, integer records and recovery claims, and each record keeps its write history along with a forced-persistence index.
 
 | Instruction | Effect |
 |---|---|
@@ -16,19 +16,19 @@ A program has one or two actors, integer records and recovery claims. Each recor
 
 ## Crashes and recovery
 
-At every instruction boundary the explorer picks, for each record, any persisted version between its forced and latest index. Registers and signals vanish. A flush stops rollback past its point; it doesn't force later writes to survive.
+At every instruction boundary the explorer picks, for each record, any persisted version between its forced and latest index, and registers and signals vanish. A flush stops rollback past its point, but it doesn't force later writes to survive.
 
-`Claim(source, dependent)` requires `dependent <= source` after recovery. With `discard_invalid=True` a dependent value that names a missing source is dropped, which models a rebuildable cache.
+`Claim(source, dependent)` requires `dependent <= source` after recovery, and with `discard_invalid=True` a dependent value that names a missing source is dropped, which models a rebuildable cache.
 
 ## Scheduling
 
-The search allows two preemptions. Switching away from an actor that could still run counts as one. A producer-first trace always runs the lowest enabled actor, a consumer-first trace the highest, and joint exploration branches on every choice. Searches stop at 50,000 prefixes or 250,000 crash checks.
+The search allows two preemptions, where switching away from an actor that could still run counts as one. A producer-first trace always runs the lowest enabled actor and a consumer-first trace the highest, while joint exploration branches on every choice. Searches stop at 50,000 prefixes or 250,000 crash checks.
 
 For a claim `dependent <= source`, a violating image exists exactly when `max(dependent) > min(source)` over the persisted values that may survive. The `joint_extrema` search checks only that candidate per claim, so it finds the same failures with fewer crash checks.
 
 ## Results
 
-From [results/launch/report.json](../results/launch/report.json), joint exploration of the eight example programs:
+Joint exploration of the eight example programs gives these counts, taken from [results/launch/report.json](../results/launch/report.json):
 
 | Program | Schedules | Crash checks | Bad observations |
 |---|---:|---:|---:|
@@ -41,7 +41,7 @@ From [results/launch/report.json](../results/launch/report.json), joint explorat
 | `single_process_missing_flush` | 1 | 9 | 1 |
 | `independent_noise` | 9 | 193 | 1 |
 
-The producer-first trace flushes the source before the consumer reads it, so it never sees the bug. The consumer-first trace finds it in 16 crash checks.
+The producer-first trace flushes the source before the consumer reads it, so it never sees the bug, while the consumer-first trace finds it in 16 crash checks.
 
 ## Run everything
 
@@ -52,7 +52,7 @@ python3 tools/check_baseline.py
 python3 -m unittest discover -s tests -v
 ```
 
-Use a fresh output directory per probe. `verify` rejects a run whose sources, settings or files changed.
+Each probe should get a fresh output directory, and `verify` rejects a run whose sources, settings or files have changed.
 
 ## Further reading
 
