@@ -1,16 +1,6 @@
 # Durability Debt
 
-I built a small crash-recovery teaching demo about a write that becomes visible before it becomes durable.
-
-**Question:** how can a schedule that looks correct without a crash leave a saved result without its input?
-
-The browser lesson steps through an unsafe producer/consumer handoff and its fix. At each instruction boundary it shows every disk state the finite model allows, and whether recovery accepts it. I generate the events, crash states, and comparison counts from [the model](durability_debt/model.py) and [the explorer](durability_debt/explore.py), not from a hand-written animation.
-
-[Open the lesson](https://mottopanikeiku.github.io/durability-debt/), or build it below and open `_site/index.html`. It works offline, needs no JavaScript framework, and includes the full boundary tables even with JavaScript disabled. The [page generator](tools/build_site.py) also exports `scenario.json` with source hashes.
-
-## What the demo teaches
-
-In [the modeled cases](durability_debt/cases.py), both `source` and `manifest` start at version `0`. Recovery requires `manifest <= source`: a saved result must not refer to an input version that disappeared.
+An interactive model of one crash-consistency bug. A producer makes a write visible before it is durable, a consumer builds on it and saves the result, and a crash leaves that result on disk without the input it came from.
 
 ```text
 Producer                       Consumer
@@ -22,45 +12,26 @@ signal ready ----------------> wait ready
                  CRASH before producer flushes source
 ```
 
-The explorer finds a witness allowing **`source=0, manifest=1`** ([saved witness](results/launch/report.json)). I replay that witness through the consumer's flush, then finish the schedule. At the failing boundary, the consumer's result must survive but the source may not. At the final boundary, both records are flushed and recovery is valid again. A correct ending does not make every earlier crash safe.
+The producer writes `source = 1` and signals "ready" before flushing it. The consumer reads the new source, writes `manifest = 1` and flushes that. A crash before the producer's flush can leave `manifest = 1` and `source = 0` on disk, which breaks the recovery rule `manifest <= source`. In this model, flushing the source before signaling (`write source; flush source; signal ready`) leaves no bad crash state.
 
-**Fix:** `write source; flush source; signal ready`. The consumer cannot read the new version until it is forced to survive a modeled crash. The page lets you compare both orderings and inspect the allowed crash images rather than just watching the failure.
+![Stepping through the unsafe ordering, then the fixed one](assets/durability-debt.gif)
 
-## Result
+The [lesson page](https://mottopanikeiku.github.io/durability-debt/) steps through either ordering one instruction at a time. After each instruction it lists every disk state a crash could leave and marks the ones that break recovery. It works offline, and the tables are plain HTML if JavaScript is off.
 
-The [saved explorer report](results/launch/report.json) records these counts. The page regenerates them with the same search settings. Crash checks include repeated images at different execution prefixes; bad observations are distinct recovery outcomes, not separate bugs.
+A small explorer generates all of it. With at most two preemptions, the unsafe ordering has five schedules and one bad crash outcome in 34 crash checks. Whether a single test run sees the bug depends on the schedule. A producer-first trace flushes the source before the consumer reads it and never sees it; a consumer-first trace finds it.
 
-| Case / search | Complete schedules | Crash checks | Bad observations |
-|---|---:|---:|---:|
-| Publish first, producer-first trace | 1 | 11 | 0 |
-| Publish first, consumer-first trace | 1 | 16 | 1 |
-| Publish first, joint exploration | 5 | 34 | 1 |
-| Flush first, joint exploration | 1 | 10 | 0 |
+## Building the page
 
-The producer-first trace misses the race. **A consumer-first single-trace baseline finds it too.** I demonstrate schedule sensitivity, not a new detection algorithm or a speedup.
-
-## Reproduce
-
-From a checkout, with Python 3.11 or newer and its standard library:
+Python 3.11+, no dependencies:
 
 ```sh
-nice -n 19 python3 tools/build_site.py --output _site
-nice -n 19 python3 tools/demo.py
-nice -n 19 python3 -m unittest discover -s tests -v
+python3 tools/build_site.py --output _site
+python3 tools/demo.py
+python3 -m unittest discover -s tests -v
 ```
 
-Open `_site/index.html` for the local lesson. The [project notes](docs/README.md) cover the full probe, historical records, and Pages deployment.
+Then open `_site/index.html`. The [model notes](docs/model.md) cover the instructions, scheduling and saved results.
 
-## Limitations
+## Related work
 
-- Synthetic examples, not bugs discovered in real applications.
-- Atomic whole-record writes and independent persistence; no torn writes or filesystem metadata.
-- Exploration allows at most two preemptions ([search default](durability_debt/explore.py)), not all possible schedules.
-- No native processes, ext4, SQLite, mmap, or physical power-loss experiments.
-- Flush-before-publication fixes this model, not every real storage protocol.
-
-## Prior work and authorship
-
-The visibility-before-durability problem is established in [PMRace](https://github.com/yhuacode/pmrace) and [DURINN](https://www.usenix.org/system/files/osdi22-fu.pdf). [PerSeVerE](https://plv.mpi-sws.org/persevere/) explores concurrency and persistence together; [ALICE](https://github.com/madthanu/alice) constructs application crash states. I wrote this teaching model independently; it is not a reproduction of their implementations.
-
-Alp Cetin (`mottopanikeiku`), MIT license.
+The same failure class is studied in [PMRace](https://github.com/yhuacode/pmrace), [DURINN](https://www.usenix.org/system/files/osdi22-fu.pdf), [PerSeVerE](https://plv.mpi-sws.org/persevere/) and [ALICE](https://github.com/madthanu/alice), on real persistent memory and file systems. This repo uses a tiny integer-record model so the bug is easy to see. MIT license.
